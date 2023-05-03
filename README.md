@@ -19,7 +19,8 @@ Para tener un repositorio donde subir nuestro código.
 ### 4. Status de nuestro repo en local
 Si queremos ver cómo vamos podemos hacer un `git status` y nos mostrará si hay archivos sin seguimiento, modificados, eliminados y en que rama nos encontramos, etc.
 ### 5. **Commit** de nuestros archivos trackeados (con seguimiento)
-```git commit -m "Descripcion del commit"```
+```git commit -m "Descripcion del commit"``` La bandera **-m** agrega el mensaje del commit \
+```git commit -am "Descripcion del commit"``` Asi con la bandera **-am** da seguimiento a los archivos y agregamos el mensaje del commit
 ### **6.** Subir nuestros cambios
 ``` git push origin NOMBRE-RAMA```
 
