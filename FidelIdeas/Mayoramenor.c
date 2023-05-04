@@ -11,7 +11,7 @@ int generardatos(struct Lugar *A, int n);
 int main(){
     struct Lugar *ayuda;
     ayuda=(struct Lugar *) malloc(16 * sizeof(struct Lugar)); 
-
+    
 
 
     int k1, k2, aux, n, lista[20]; 
@@ -42,7 +42,7 @@ printf("--------------------------------------------------\n\n");
         printf ("\n\n");
     }
     
-
+printf("%d %d ", ayuda[2].clave, ayuda[2].NumRand); 
 
     return 0; 
 }
