@@ -84,4 +84,3 @@ void imprimirDatos(struct futbolTeams *F, int n){
     }
     
 }
-
