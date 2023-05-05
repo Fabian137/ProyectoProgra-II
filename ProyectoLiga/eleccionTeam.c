@@ -25,7 +25,7 @@ int main(){
     int arr[8];
     // leerDatos(equipo, 3);
 
-    generararreglo(n, arr);
+    generarDatos(equipo, n, arr);
     
 
     printf("\n\nArreglo ya mezclado: \n\n"); 
@@ -68,24 +68,17 @@ void generarDatos(struct futbolTeams *F, int n, int arr[8]){
     */
     //srand(time(NULL));
             srand(time(NULL));
+
 //-------------Fragmento que mezcla los datos ------------------------------
-                
-        for(i=0; i < n; i++){
-        int temporal; 
-        int indicealeatorio = aleatorio (0, n-1); 
-
-        temporal = arr[i];
-        arr[i] = arr[indicealeatorio];
-        arr[indicealeatorio] = temporal; 
-
-    }
+    generararreglo(n, arr);
 //-------------Aqui termina----------------
+
     for (j = 0; j < n; j++){
 
         if (fscanf(archivo, "%s,", teams) != EOF){
 
             c=arr[j];
-            printf("%d\n", c);
+
             strcpy(F[c].teamsName, teams);
         }
         
@@ -134,6 +127,16 @@ void generararreglo(int n, int arr[8]){
     int i;
     for(i=0; i < n; i++){
         arr[i]= i;
+    }
+    
+    for(i=0; i < n; i++){
+        int temporal; 
+        int indicealeatorio = aleatorio (0, n-1); 
+
+        temporal = arr[i];
+        arr[i] = arr[indicealeatorio];
+        arr[indicealeatorio] = temporal; 
+
     }
     
 }
