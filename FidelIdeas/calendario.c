@@ -5,27 +5,22 @@
 
 struct futbolTeams{
     char teamsName[20], D_Tecnico[20], Capitan[10], MVP[10];
-    int clave, n_jugadores, goles, faltas, ganadas, perdidas, numRand;
+    int clave, n_jugadores, goles, faltas, ganadas, perdidas;
 };
 
 void leerDatos(struct futbolTeams *, int);
 void generarDatos(struct futbolTeams *, int);
 void imprimirDatos(struct futbolTeams *, int);
-void ordenar(struct futbolTeams *, int);
-int busqueda_NRandomEquipo(struct futbolTeams *, int );
-int idenficadorEquipo(struct futbolTeams *, int , int);
+void PlaysGenerator(struct futbolTeams *, int); //CALENDARIO
 
 int main(){
     struct futbolTeams *equipo;
-    int max, numTeam = 0;
     equipo = (struct futbolTeams *) malloc(16 * sizeof(struct futbolTeams));
 
+    int day, month, year;
+
     // leerDatos(equipo, 3);
- 
     generarDatos(equipo, 3);
-    max = busqueda_NRandomEquipo(equipo, 16);
-    numTeam = idenficadorEquipo(equipo, 16, max);
-    printf("\n\t %d -- %d -- %s", max, numTeam, equipo[numTeam].teamsName);
     imprimirDatos(equipo, 3);
 
     return 0;
@@ -53,25 +48,23 @@ void generarDatos(struct futbolTeams *F, int n){
     archivo = fopen("data/teams.csv", "r");
     
     if (archivo == NULL) {
-        printf("Error al abrir el archivo\n");
+    printf("Error al abrir el archivo\n");
     }
     /*
     */
-    srand(time(NULL)); //
     for (i = 0; i < n; i++){
+    srand(time(NULL)); //
 
         if (fscanf(archivo, "%s,", teams) != EOF){
-            strcpy(F[i+1].teamsName, teams);
+            strcpy(F[i].teamsName, teams);
         }
         
         F[i].n_jugadores = 11;
         F[i].goles = rand() % 5;
-        F[i].numRand= rand() % 200;
-        // F[i].ganadas = rand() % 4;
-        // F[i].perdidas = rand() % 4;
-        F[i].faltas = rand() % 4;
-        // F[i].clave = i +100;
-        F[i].clave = i;
+        F[i].ganadas = rand() % 4;
+        F[i].perdidas = rand() % 4;
+        F[i].faltas= rand() % 7;
+        F[i].clave = i +100;
     }
 
     fclose(archivo);
@@ -83,7 +76,6 @@ void imprimirDatos(struct futbolTeams *F, int n){
     for ( i = 0; i < n; i++){
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
         printf("\n\t\tclave de equipo: %d", F[i].clave);
-        printf("\n\t\tNUMEROOO: %d", F[i].numRand);
         printf("\n\tDirector Tecnico: %s", F[i].D_Tecnico);
         printf("\n\tCapitan: %s", F[i].Capitan);
         printf("\n\tMVP: ...%s", F[i].MVP);
@@ -96,27 +88,11 @@ void imprimirDatos(struct futbolTeams *F, int n){
     
 }
 
-int busqueda_NRandomEquipo(struct futbolTeams *F, int n){
-   int i;
-   int max = 0;
-   for (i = 0; i < n; i++) {
-      if (F[i].numRand > max) {
-         max = F[i].numRand;
-      }
-   }
-   return max;
-}
 
-int idenficadorEquipo(struct futbolTeams *F, int n, int maxNum){
-    int i;
-    for (i = 0; i < n; i++){
-        if (maxNum == F[i].numRand){
-            return i;
-        }
-    }
-}
+void PlaysGenerator(struct futbolTeams *, int){
 
-void ordenar(struct futbolTeams *F, int n){
+    FILE *calendar;
+    FILE *calendar;
 
-
+    calendar = fopen("calendario.csv", "w");
 }
