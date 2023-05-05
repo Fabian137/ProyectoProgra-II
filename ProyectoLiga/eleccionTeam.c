@@ -29,35 +29,13 @@ int main(){
     generarDatos(equipo, n, arr);
     
 
-    printf("\n\nArreglo Original: \n\n"); 
+    printf("\n\nArreglo ya mezclado: \n\n"); 
         for(i=0; i < n; i++){
             printf("%d\n", arr[i]);
 
-      //  printf("El dato %d es : %d \n\n", i, equipo[i].clave);
-
     } 
 
-    //Fragmento que los mezcla
-        for(i=0; i < n; i++){
-        indicealeatorio = aleatorio (0, n-1); 
 
-        temporal = equipo[i].clave;
-        equipo[i].clave = equipo[indicealeatorio].clave;
-        equipo[indicealeatorio].clave = temporal; 
-
-    }
-    //Fragmento que imprime las claves mezcladas+
-        printf("\n\nArreglo mezclado\n");
-
-      for(i=0; i < n; i++){
-
-       // printf("\n La posicion %d tiene la clave de equipo: %d \n\n", i, equipo[i].clave);
-
-    } 
-
-    
-
-   // printf("\n\t %d -- %d -- %s", max, numTeam, equipo[numTeam].teamsName);
     imprimirDatos(equipo, n);
 
     return 0;
@@ -79,7 +57,7 @@ void leerDatos(struct futbolTeams *F, int n){
 void generarDatos(struct futbolTeams *F, int n, int arr[8]){
     FILE *archivo;
     // char caracter;
-    int i, c=0;
+    int i, c=0, j;
     char teams[20], equipo[20];
 
     archivo = fopen("data/teams.csv", "r");
@@ -103,21 +81,22 @@ void generarDatos(struct futbolTeams *F, int n, int arr[8]){
 
     }
 //-------------Aqui termina----------------
-    for (i = 0; i < n; i++){
+    for (j = 0; j < n; j++){
 
         if (fscanf(archivo, "%s,", teams) != EOF){
-            c=arr[i];
+
+            c=arr[j];
             printf("%d\n", c);
             strcpy(F[c].teamsName, teams);
         }
         
-        F[i].n_jugadores = 11;
-        F[i].goles = rand() % 5;
+        F[j].n_jugadores = 11;
+        F[j].goles = rand() % 5;
         // F[i].ganadas = rand() % 4;
         // F[i].perdidas = rand() % 4;
-        F[i].faltas = rand() % 4;
+        F[j].faltas = rand() % 4;
         // F[i].clave = i +100;
-        F[i].clave = i;
+        F[j].clave = j;
     }
 
     fclose(archivo);
