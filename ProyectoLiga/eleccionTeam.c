@@ -26,10 +26,9 @@ int main(){
     // leerDatos(equipo, 3);
 
     generararreglo(n, arr);
-    generarDatos(equipo, n, arr);
     
 
-    printf("\n\nArreglo Original: \n\n"); 
+    // printf("\n\nArreglo Original: \n\n"); 
         for(i=0; i < n; i++){
             printf("%d\n", arr[i]);
 
@@ -47,15 +46,8 @@ int main(){
 
     }
     //Fragmento que imprime las claves mezcladas+
-        printf("\n\nArreglo mezclado\n");
-
-      for(i=0; i < n; i++){
-
-       // printf("\n La posicion %d tiene la clave de equipo: %d \n\n", i, equipo[i].clave);
-
-    } 
-
-    
+    generarDatos(equipo, n, arr);
+        // printf("\n\nArreglo mezclado\n");
 
    // printf("\n\t %d -- %d -- %s", max, numTeam, equipo[numTeam].teamsName);
     imprimirDatos(equipo, n);
@@ -104,10 +96,11 @@ void generarDatos(struct futbolTeams *F, int n, int arr[8]){
     }
 //-------------Aqui termina----------------
     for (i = 0; i < n; i++){
+        F[i].clave = arr[i];
 
         if (fscanf(archivo, "%s,", teams) != EOF){
             c=arr[i];
-            printf("%d\n", c);
+            printf("Referencia: %d ---- Arr:%d --- Clave: %d ----Team: %s\n", c, arr[i], F[i].clave, F[i].teamsName);
             strcpy(F[c].teamsName, teams);
         }
         
@@ -117,7 +110,7 @@ void generarDatos(struct futbolTeams *F, int n, int arr[8]){
         // F[i].perdidas = rand() % 4;
         F[i].faltas = rand() % 4;
         // F[i].clave = i +100;
-        F[i].clave = i;
+        printf("\n\tReferencia: %d ---- Arr:%d --- Clave: %d ----Team: %s\n", c, arr[i], F[i].clave, F[i].teamsName);
     }
 
     fclose(archivo);
@@ -126,8 +119,8 @@ void generarDatos(struct futbolTeams *F, int n, int arr[8]){
 
 void imprimirDatos(struct futbolTeams *F, int n){
     int i;
-    FILE *archivo;
-    archivo = fopen("ID_teams.csv", "w");
+    FILE *archivo_ids;
+    archivo_ids = fopen("ID_teams.csv", "w");
 
     for ( i = 0; i < n; i++){
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
@@ -141,9 +134,9 @@ void imprimirDatos(struct futbolTeams *F, int n){
         printf("\n\t\tPerdidos: %d ----- Ganados: %d", F[i].perdidas, F[i].ganadas);
         printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
     
-        fprintf(archivo, "%d,\n", F[i].clave);
+        fprintf(archivo_ids, "%d, %d, %s\n", F[i].clave, i, F[i].teamsName);
     }
-    fclose(archivo);
+    fclose(archivo_ids);
 }
 
 int aleatorio(int min, int max){
