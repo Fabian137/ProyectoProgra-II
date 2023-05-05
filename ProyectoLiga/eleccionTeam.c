@@ -9,24 +9,56 @@ struct futbolTeams{
 };
 
 void leerDatos(struct futbolTeams *, int);
-void generarDatos(struct futbolTeams *, int);
+void generarDatos(struct futbolTeams *, int, int arr[8]);
 void imprimirDatos(struct futbolTeams *, int);
 void ordenar(struct futbolTeams *, int);
 int busqueda_NRandomEquipo(struct futbolTeams *, int );
 int idenficadorEquipo(struct futbolTeams *, int , int);
+int aleatorio(int min, int max);
+void generararreglo(int numeroequipos, int arr[8]);
 
 int main(){
     struct futbolTeams *equipo;
-    int max, numTeam = 0;
+    int max, numTeam = 0, i, n, indicealeatorio, temporal;
     equipo = (struct futbolTeams *) malloc(16 * sizeof(struct futbolTeams));
-
+    n = 8; 
+    int arr[8];
     // leerDatos(equipo, 3);
- 
-    generarDatos(equipo, 3);
-    max = busqueda_NRandomEquipo(equipo, 16);
-    numTeam = idenficadorEquipo(equipo, 16, max);
-    printf("\n\t %d -- %d -- %s", max, numTeam, equipo[numTeam].teamsName);
-    imprimirDatos(equipo, 3);
+
+    generararreglo(n, arr);
+    generarDatos(equipo, n, arr);
+    
+
+    printf("\n\nArreglo Original: \n\n"); 
+        for(i=0; i < n; i++){
+            printf("%d\n", arr[i]);
+
+      //  printf("El dato %d es : %d \n\n", i, equipo[i].clave);
+
+    } 
+
+    //Fragmento que los mezcla
+        for(i=0; i < n; i++){
+        indicealeatorio = aleatorio (0, n-1); 
+
+        temporal = equipo[i].clave;
+        equipo[i].clave = equipo[indicealeatorio].clave;
+        equipo[indicealeatorio].clave = temporal; 
+
+    }
+    //Fragmento que imprime las claves mezcladas+
+        printf("\n\nArreglo mezclado\n");
+
+      for(i=0; i < n; i++){
+
+       // printf("\n La posicion %d tiene la clave de equipo: %d \n\n", i, equipo[i].clave);
+
+    } 
+
+    
+
+   // printf("\n\t %d -- %d -- %s", max, numTeam, equipo[numTeam].teamsName);
+    imprimirDatos(equipo, n);
 
     return 0;
 
@@ -44,7 +76,7 @@ void leerDatos(struct futbolTeams *F, int n){
     }
 }
 
-void generarDatos(struct futbolTeams *F, int n){
+void generarDatos(struct futbolTeams *F, int n, int arr[8]){
     FILE *archivo;
     // char caracter;
     int i, c=0;
@@ -57,16 +89,30 @@ void generarDatos(struct futbolTeams *F, int n){
     }
     /*
     */
-    srand(time(NULL)); //
+    //srand(time(NULL));
+            srand(time(NULL));
+//-------------Fragmento que mezcla los datos ------------------------------
+                
+        for(i=0; i < n; i++){
+        int temporal; 
+        int indicealeatorio = aleatorio (0, n-1); 
+
+        temporal = arr[i];
+        arr[i] = arr[indicealeatorio];
+        arr[indicealeatorio] = temporal; 
+
+    }
+//-------------Aqui termina----------------
     for (i = 0; i < n; i++){
 
         if (fscanf(archivo, "%s,", teams) != EOF){
-            strcpy(F[i+1].teamsName, teams);
+            c=arr[i];
+            printf("%d\n", c);
+            strcpy(F[c].teamsName, teams);
         }
         
         F[i].n_jugadores = 11;
         F[i].goles = rand() % 5;
-        F[i].numRand= rand() % 200;
         // F[i].ganadas = rand() % 4;
         // F[i].perdidas = rand() % 4;
         F[i].faltas = rand() % 4;
@@ -80,10 +126,12 @@ void generarDatos(struct futbolTeams *F, int n){
 
 void imprimirDatos(struct futbolTeams *F, int n){
     int i;
+    FILE *archivo;
+    archivo = fopen("ID_teams.csv", "w");
+
     for ( i = 0; i < n; i++){
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
         printf("\n\t\tclave de equipo: %d", F[i].clave);
-        printf("\n\t\tNUMEROOO: %d", F[i].numRand);
         printf("\n\tDirector Tecnico: %s", F[i].D_Tecnico);
         printf("\n\tCapitan: %s", F[i].Capitan);
         printf("\n\tMVP: ...%s", F[i].MVP);
@@ -92,31 +140,22 @@ void imprimirDatos(struct futbolTeams *F, int n){
         printf("\n\tJuegos Totales: %d", F[i].perdidas + F[i].ganadas);
         printf("\n\t\tPerdidos: %d ----- Ganados: %d", F[i].perdidas, F[i].ganadas);
         printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
+    
+        fprintf(archivo, "%d,\n", F[i].clave);
+    }
+    fclose(archivo);
+}
+
+int aleatorio(int min, int max){
+
+return min + rand()/ (RAND_MAX/ (max - min + 1 ) + 1);
+
+}
+
+void generararreglo(int n, int arr[8]){
+    int i;
+    for(i=0; i < n; i++){
+        arr[i]= i;
     }
     
-}
-
-int busqueda_NRandomEquipo(struct futbolTeams *F, int n){
-   int i;
-   int max = 0;
-   for (i = 0; i < n; i++) {
-      if (F[i].numRand > max) {
-         max = F[i].numRand;
-      }
-   }
-   return max;
-}
-
-int idenficadorEquipo(struct futbolTeams *F, int n, int maxNum){
-    int i;
-    for (i = 0; i < n; i++){
-        if (maxNum == F[i].numRand){
-            return i;
-        }
-    }
-}
-
-void ordenar(struct futbolTeams *F, int n){
-
-
 }
