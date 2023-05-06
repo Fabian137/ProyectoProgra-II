@@ -11,10 +11,13 @@ struct futbolTeams{
 void leerDatos(struct futbolTeams *, int);
 void generarDatos(struct futbolTeams *, int);
 void imprimirDatos(struct futbolTeams *, int);
+void PlaysGenerator(struct futbolTeams *, int); //CALENDARIO
 
 int main(){
     struct futbolTeams *equipo;
     equipo = (struct futbolTeams *) malloc(16 * sizeof(struct futbolTeams));
+
+    int day, month, year;
 
     // leerDatos(equipo, 3);
     generarDatos(equipo, 3);
@@ -83,4 +86,13 @@ void imprimirDatos(struct futbolTeams *F, int n){
         printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
     }
     
+}
+
+
+void PlaysGenerator(struct futbolTeams *, int){
+
+    FILE *calendar;
+    FILE *calendar;
+
+    calendar = fopen("calendario.csv", "w");
 }
