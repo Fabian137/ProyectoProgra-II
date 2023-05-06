@@ -27,8 +27,8 @@ void enfrentamientos(struct futbolTeams *);
 
 int main(){
     struct futbolTeams *equipo;
-    int i, indicealeatorio, temporal, n=8;
-    equipo = (struct futbolTeams *) malloc(16 * sizeof(struct futbolTeams));
+    int i, indicealeatorio, temporal, n=4;
+    equipo = (struct futbolTeams *) malloc(n * sizeof(struct futbolTeams));
     // n = 8; 
     // int arr[8];
     int *arr;
@@ -109,7 +109,7 @@ void imprimirDatos(struct futbolTeams *F, int n){
         printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
     
         fprintf(archivo_Infos, "%d, %d, %s  ------ G: %d -------- F: %d\n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
-        fprintf(archivo_ids, "%d, \n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
+        fprintf(archivo_ids, "%d, \n", F[i].clave);
     }
     fclose(archivo_Infos);
     fclose(archivo_ids);
@@ -141,7 +141,7 @@ int filas_CSV(){
     FILE *archivoIDS;
     archivoIDS = fopen("ID_teams.csv", "r");
     int v, i=0;
-    while (fscanf(archivoIDS, "%d,", v) != EOF){
+    while (fscanf(archivoIDS, "%d,", &v) != EOF){
         i++;
     }
     return i;
@@ -152,26 +152,32 @@ void enfrentamientos(struct futbolTeams *F){
     FILE *archivoIDS;
 
     archivoIDS = fopen("ID_teams.csv", "r");
-    int i, id_team, n;
+    int i, n, id, *id_team; 
+    //id es para leer los datos del archivo y *id_team es un arreglo dinámico para guardar los datos de id 
+    id_team = (int *) malloc(n * sizeof(int));
     n = filas_CSV();
-    printf("%d", n);
-
-    /*
-    while (fscanf(archivoIDS, "%d,", id_team) != EOF){
-        i++;
-        if(){
-        
-        }
-        
-    }
-    */
     
-    for (i = 0; i < n; i+=2){
-        if(fscanf(archivoIDS, "%d,", id_team) != EOF){
-            if(){
+    // printf("");
 
-            }
+    for (i = 0; i < n; i++){
+        if(fscanf(archivoIDS, "%d,", &id) != EOF){
+            printf("%d ----- %d - %d \n", id, i, i+1);
+            id_team[i] = id;
         }
-        printf("%d -- %d\n", i, i+1);
     }
+    printf("\n\n");
+
+
+    for (i = 0; i < n; i+=2){
+        printf("%d -- %d \n", id_team[i], id_team[i+1]);
+        printf("%s -- %s \n", F[id_team[i]].teamsName, F[id_team[i+1]].teamsName);
+        if (
+            
+        )
+        {
+            /* code */
+        }
+        
+    }
+
 }
