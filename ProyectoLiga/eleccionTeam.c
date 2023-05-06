@@ -109,7 +109,7 @@ void imprimirDatos(struct futbolTeams *F, int n){
         printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
     
         fprintf(archivo_Infos, "%d, %d, %s  ------ G: %d -------- F: %d\n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
-        fprintf(archivo_ids, "%d, \n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
+        fprintf(archivo_ids, "%d, \n", F[i].clave);
     }
     fclose(archivo_Infos);
     fclose(archivo_ids);
@@ -141,7 +141,7 @@ int filas_CSV(){
     FILE *archivoIDS;
     archivoIDS = fopen("ID_teams.csv", "r");
     int v, i=0;
-    while (fscanf(archivoIDS, "%d,", v) != EOF){
+    while (fscanf(archivoIDS, "%d,", &v) != EOF){
         i++;
     }
     return i;
@@ -154,7 +154,7 @@ void enfrentamientos(struct futbolTeams *F){
     archivoIDS = fopen("ID_teams.csv", "r");
     int i, id_team, n;
     n = filas_CSV();
-    printf("%d", n);
+    //printf("%d", n);
 
     /*
     while (fscanf(archivoIDS, "%d,", id_team) != EOF){
@@ -164,14 +164,14 @@ void enfrentamientos(struct futbolTeams *F){
         }
         
     }
-    */
     
     for (i = 0; i < n; i+=2){
         if(fscanf(archivoIDS, "%d,", id_team) != EOF){
-            if{
+            if(){
 
             }
         }
         printf("%d -- %d\n", i, i+1);
     }
+    */
 }

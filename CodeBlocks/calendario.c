@@ -1,98 +1,35 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
 #include <time.h>
 
-struct futbolTeams{
-    char teamsName[20], D_Tecnico[20], Capitan[10], MVP[10];
-    int clave, n_jugadores, goles, faltas, ganadas, perdidas;
-};
+int main(void) {
+  
+  printf("La liga comenzara en el mes de Marzo\n\n"); 
 
-void leerDatos(struct futbolTeams *, int);
-void generarDatos(struct futbolTeams *, int);
-void imprimirDatos(struct futbolTeams *, int);
-void PlaysGenerator(struct futbolTeams *, int); //CALENDARIO
+  printf("Los dias que se realizaran los enfrentamientos serán los sabados y domingos. \n\n");
 
-int main(){
-    struct futbolTeams *equipo;
-    equipo = (struct futbolTeams *) malloc(16 * sizeof(struct futbolTeams));
+  printf("Sera un enfrentamiento por dia, por lo que los dias que se realizaran los enfrentamientos seran los dias: \n\n ");
 
-    int day, month, year;
-
-    // leerDatos(equipo, 3);
-    generarDatos(equipo, 3);
-    imprimirDatos(equipo, 3);
-
-    return 0;
-
-}
-
-void leerDatos(struct futbolTeams *F, int n){
-    int i;
-    for (i = 0; i < n; i++){
-        printf("\nIngresa el nombre del equipo ");
-        scanf("%s", F[i].teamsName);
-        printf("\nIngresa el nombre del Director Tecnico ");
-        scanf("%s", F[i].D_Tecnico);
-        printf("\nIngresa el nombre del Capitan ");
-        scanf("%s", F[i].Capitan);
-    }
-}
-
-void generarDatos(struct futbolTeams *F, int n){
-    FILE *archivo;
-    // char caracter;
-    int i, c=0;
-    char teams[20], equipo[20];
-
-    archivo = fopen("data/teams.csv", "r");
-    
-    if (archivo == NULL) {
-    printf("Error al abrir el archivo\n");
-    }
-    /*
-    */
-    for (i = 0; i < n; i++){
-    srand(time(NULL)); //
-
-        if (fscanf(archivo, "%s,", teams) != EOF){
-            strcpy(F[i].teamsName, teams);
-        }
-        
-        F[i].n_jugadores = 11;
-        F[i].goles = rand() % 5;
-        F[i].ganadas = rand() % 4;
-        F[i].perdidas = rand() % 4;
-        F[i].faltas= rand() % 7;
-        F[i].clave = i +100;
-    }
-
-    fclose(archivo);
-    
-}
-
-void imprimirDatos(struct futbolTeams *F, int n){
-    int i;
-    for ( i = 0; i < n; i++){
-        printf("\n\n\t\t---- %s ----", F[i].teamsName);
-        printf("\n\t\tclave de equipo: %d", F[i].clave);
-        printf("\n\tDirector Tecnico: %s", F[i].D_Tecnico);
-        printf("\n\tCapitan: %s", F[i].Capitan);
-        printf("\n\tMVP: ...%s", F[i].MVP);
-        printf("\n\tNumero de jugadores: %d", F[i].n_jugadores);
-
-        printf("\n\tJuegos Totales: %d", F[i].perdidas + F[i].ganadas);
-        printf("\n\t\tPerdidos: %d ----- Ganados: %d", F[i].perdidas, F[i].ganadas);
-        printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
-    }
-    
-}
+  printf("\n\nMarzo 2023\n\n");
+ 
+  printf("Sabado 4 de Marzo:  \n\n");
+  printf("Domingo 5 de Marzo: \n\n");
+  printf("Sabado 11 de Marzo:  \n\n");
+  printf("Domingo 12 de Marzo: \n\n");
+  printf("Sabado 18 de Marzo:  \n\n");
+  printf("Domingo 19 de Marzo: \n\n");
+  printf("Sabado 25 de Marzo:  \n\n");
+  printf("Domingo 26 de Marzo: \n\n");
 
 
-void PlaysGenerator(struct futbolTeams *, int){
 
-    FILE *calendar;
-    FILE *calendar;
+  printf("\n\nAbril 2023\n\n");
 
-    calendar = fopen("calendario.csv", "w");
+  printf("Sabado  Domingo\n");
+  
+  printf("   1        2\n");
+  printf("   8        9\n");
+  printf("  15        16\n");
+  printf("  22        23\n");
+
+  return 0;
 }
