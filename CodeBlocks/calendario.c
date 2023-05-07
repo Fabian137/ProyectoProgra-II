@@ -1,35 +1,63 @@
 #include <stdio.h>
 #include <time.h>
 
-int main(void) {
-  
-  printf("La liga comenzara en el mes de Marzo\n\n"); 
+void imprimirarreglo(int arr[], int tamaño){
+    printf("Los valares lamacenados en j: \n\n"); 
 
-  printf("Los dias que se realizaran los enfrentamientos serán los sabados y domingos. \n\n");
-
-  printf("Sera un enfrentamiento por dia, por lo que los dias que se realizaran los enfrentamientos seran los dias: \n\n ");
-
-  printf("\n\nMarzo 2023\n\n");
- 
-  printf("Sabado 4 de Marzo:  \n\n");
-  printf("Domingo 5 de Marzo: \n\n");
-  printf("Sabado 11 de Marzo:  \n\n");
-  printf("Domingo 12 de Marzo: \n\n");
-  printf("Sabado 18 de Marzo:  \n\n");
-  printf("Domingo 19 de Marzo: \n\n");
-  printf("Sabado 25 de Marzo:  \n\n");
-  printf("Domingo 26 de Marzo: \n\n");
+    for(){
 
 
 
-  printf("\n\nAbril 2023\n\n");
+    }
 
-  printf("Sabado  Domingo\n");
-  
-  printf("   1        2\n");
-  printf("   8        9\n");
-  printf("  15        16\n");
-  printf("  22        23\n");
 
-  return 0;
+
 }
+
+void fechas(int init){
+    int i, j[8], index=0;
+     for (i = init; i <= 31; i += 7) {
+        printf("Sabado %d de Marzo:  \n\n", i);
+        printf("");
+        printf("Domingo %d de Marzo: \n\n", i + 1);
+
+        j[index] = i;
+        j[index + 1] = i + 1;
+        index += 2;
+
+    }
+
+    printf("\n\n");
+
+    printf("\nValores almacenados en el arreglo j:\n");
+    for (i = 0; i < index; i++) {
+        printf("%d ", j[i]);
+        printf
+    }
+    
+}
+
+int main(void) {
+    int i, j[8];
+ 
+//    printf("\nMarzo\n\n"); 
+fechas(4);
+printf("\n\n");
+fechas(1);
+printf("\n\n");
+/*
+    int index = 0;
+    for (i = 4; i <= 31; i += 7) {
+        printf("Sabado %d de Marzo:  \n\n", i);
+        printf("Domingo %d de Marzo: \n\n", i + 1);
+
+        j[index] = i;
+        j[index + 1] = i + 1;
+        index += 2;
+    }
+*/
+
+
+    return 0;
+}
+
