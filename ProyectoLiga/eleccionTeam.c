@@ -36,11 +36,11 @@ int main(){
 
     generarDatos(equipo, n, arr);
         
-    printf("\n\nArreglo ya mezclado: \n\n"); 
-        for(i=0; i < n; i++){
-            printf("%d\n", arr[i]);
+    // printf("\n\nArreglo ya mezclado: \n\n"); 
+    //     for(i=0; i < n; i++){
+    //         printf("%d\n", arr[i]);
 
-    } 
+    // } 
 
     imprimirDatos(equipo, n);
 
@@ -97,6 +97,7 @@ void imprimirDatos(struct futbolTeams *F, int n){
     archivo_ids = fopen("ID_teams.csv", "w");
 
     for ( i = 0; i < n; i++){
+        /*
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
         printf("\n\t\tclave de equipo: %d", F[i].clave);
         printf("\n\tDirector Tecnico: %s", F[i].D_Tecnico);
@@ -107,6 +108,7 @@ void imprimirDatos(struct futbolTeams *F, int n){
         printf("\n\tJuegos Totales: %d", F[i].perdidas + F[i].ganadas);
         printf("\n\t\tPerdidos: %d ----- Ganados: %d", F[i].perdidas, F[i].ganadas);
         printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
+        */
     
         fprintf(archivo_Infos, "%d, %d, %s  ------ G: %d -------- F: %d\n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
         fprintf(archivo_ids, "%d, \n", F[i].clave);
@@ -140,10 +142,20 @@ void generararreglo(int n, int arr[8]){
 int filas_CSV(){
     FILE *archivoIDS;
     archivoIDS = fopen("ID_teams.csv", "r");
-    int v, i=0;
-    while (fscanf(archivoIDS, "%d,", &v) != EOF){
+    int id, i=0;
+
+    
+    while (fscanf(archivoIDS, "%d,", &id) != EOF){
         i++;
     }
+    /*
+    Con el while solo leo la cantidad de variables que existe, para asi saber el numero de filas y por ende número de interaciones que necesito. Para asi hacer los enfrentamientos
+    */
+    /*
+    Este for es para guardar */
+
+
+
     return i;
     
 }
@@ -154,10 +166,9 @@ void enfrentamientos(struct futbolTeams *F){
     archivoIDS = fopen("ID_teams.csv", "r");
     int i, n, id, *id_team; 
     //id es para leer los datos del archivo y *id_team es un arreglo dinámico para guardar los datos de id 
-    id_team = (int *) malloc(n * sizeof(int));
+    // id_team = (int *) malloc(n * sizeof(int));
     n = filas_CSV();
-    
-    // printf("");
+    id_team = (int *) malloc(n * sizeof(int));
 
     for (i = 0; i < n; i++){
         if(fscanf(archivoIDS, "%d,", &id) != EOF){
@@ -171,13 +182,42 @@ void enfrentamientos(struct futbolTeams *F){
     for (i = 0; i < n; i+=2){
         printf("%d -- %d \n", id_team[i], id_team[i+1]);
         printf("%s -- %s \n", F[id_team[i]].teamsName, F[id_team[i+1]].teamsName);
-        if (
+
+
+        if (F[id_team[i]].goles > F[id_team[i+1]].goles){
+            // printf("hola-?");
+            printf("\n\tGana el equipo de: ---%s\n", F[id_team[i]].teamsName);    
+        }
+        else if (F[id_team[i+1]].goles > F[id_team[i]].goles){
+            printf("\n\tGana el equipo de: ---%s\n", F[id_team[i+1]].teamsName);    
+        }
+        else{
+            if (F[id_team[i]].faltas > F[id_team[i+1]].faltas){
+                printf("\n\tGana el equipo de: ---%s \n", F[id_team[i+1]].teamsName);
+            }
+            else if (F[id_team[i+1]].faltas > F[id_team[i]].faltas){
+                printf("\n\tGana el equipo de: ---%s \n", F[id_team[i]].teamsName);
+            }
+            else{
+                printf("\n\t %s\n", F[id_team[i]].teamsName);
+            }
             
-        )
-        {
-            /* code */
         }
         
+        
+
+        // else if(F[id_team[i+1]].goles >  F[id_team[i]].goles){
+        // printf("Gana el equipo de: ---%s", F[id_team[i+1]].goles);
+        
+        // }
+        
+        // else{
+        //     if(F[id_team[i]].faltas > F[id_team[i+1]].faltas || F[id_team[i+1]].faltas > F[id_team[i]].faltas){
+            
+        // }
+        
+        
+        }
     }
 
-}
+// }
