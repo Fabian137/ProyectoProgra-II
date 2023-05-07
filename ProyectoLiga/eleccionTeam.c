@@ -47,6 +47,8 @@ int main(){
     enfrentamientos(equipo);
 /*
 */
+free(equipo);
+free(arr); 
 
     return 0;
 
@@ -155,7 +157,7 @@ int filas_CSV(){
     Este for es para guardar */
 
 
-
+    fclose(archivoIDS); 
     return i;
     
 }
@@ -218,6 +220,5 @@ void enfrentamientos(struct futbolTeams *F){
         
         
         }
+        fclose("archivoIDS"); 
     }
-
-// }
