@@ -24,10 +24,13 @@ void generararreglo(int numeroequipos, int *arr);
 int filas_CSV();
 // void enfrentamientos(struct futbolTeams *,  int);
 void enfrentamientos(struct futbolTeams *);
+void fechas(struct futbolTeams *, int init, int, int *);
+
+
 
 int main(){
     struct futbolTeams *equipo;
-    int i, indicealeatorio, temporal, n=4;
+    int i, indicealeatorio, temporal, n=16;
     equipo = (struct futbolTeams *) malloc(n * sizeof(struct futbolTeams));
     // n = 8; 
     // int arr[8];
@@ -45,6 +48,7 @@ int main(){
     imprimirDatos(equipo, n);
 
     enfrentamientos(equipo);
+    //fechas(4);
 /*
 */
 free(equipo);
@@ -54,13 +58,13 @@ free(arr);
 
 }
 
-void generarDatos(struct futbolTeams *F, int n, int arr[8]){
+void generarDatos(struct futbolTeams *F, int n, int arr[n]){
     FILE *archivo;
     // char caracter;
     int i, c=0, j;
     char teams[20], equipo[20];
 
-    archivo = fopen("data/teams.csv", "r");
+    archivo = fopen("data/teams.txt", "r");
     
     if (archivo == NULL) {
         printf("Error al abrir el archivo\n");
@@ -74,7 +78,7 @@ void generarDatos(struct futbolTeams *F, int n, int arr[8]){
 
     for (j = 0; j < n; j++){
 
-        if (fscanf(archivo, "%s,", teams) != EOF){
+        if (fscanf(archivo, "%s", teams) != EOF){
 
             c=arr[j];
 
@@ -123,7 +127,7 @@ int aleatorio(int min, int max){
     return min + rand()/ (RAND_MAX/ (max - min + 1 ) + 1);
 }
 
-void generararreglo(int n, int arr[8]){
+void generararreglo(int n, int arr[n]){
     int i;
     for(i=0; i < n; i++){
         arr[i]= i;
@@ -174,16 +178,18 @@ void enfrentamientos(struct futbolTeams *F){
 
     for (i = 0; i < n; i++){
         if(fscanf(archivoIDS, "%d,", &id) != EOF){
-            printf("%d ----- %d - %d \n", id, i, i+1);
+            //printf("%d ----- %d - %d \n", id, i, i+1);
             id_team[i] = id;
+
+            printf("\n %d", id_team[i]);
         }
     }
     printf("\n\n");
-
+    fechas(F, 4, n, id_team);
 
     for (i = 0; i < n; i+=2){
-        printf("%d -- %d \n", id_team[i], id_team[i+1]);
-        printf("%s -- %s \n", F[id_team[i]].teamsName, F[id_team[i+1]].teamsName);
+        //printf("%d -- %d \n", id_team[i], id_team[i+1]);
+        //printf("%s -- %s \n", F[id_team[i]].teamsName, F[id_team[i+1]].teamsName);
 
 
         if (F[id_team[i]].goles > F[id_team[i+1]].goles){
@@ -206,19 +212,34 @@ void enfrentamientos(struct futbolTeams *F){
             
         }
         
-        
-
-        // else if(F[id_team[i+1]].goles >  F[id_team[i]].goles){
-        // printf("Gana el equipo de: ---%s", F[id_team[i+1]].goles);
-        
-        // }
-        
-        // else{
-        //     if(F[id_team[i]].faltas > F[id_team[i+1]].faltas || F[id_team[i+1]].faltas > F[id_team[i]].faltas){
-            
-        // }
-        
-        
         }
-        fclose("archivoIDS"); 
+        fclose(archivoIDS); 
     }
+
+void fechas(struct futbolTeams *F, int init, int lenght, int ids[lenght]){
+    FILE *archivoIDS;
+    archivoIDS = fopen("ID_teams.csv", "r");
+
+    int i, j[8], index=0, z=-2;
+    for (i = init; i <= 31; i += 7) {
+        //printf("Sabado %d de Marzo:  \n\n", i);
+        //printf("");
+        //printf("Domingo %d de Marzo: \n\n", i + 1);
+
+        j[index] = i;
+        j[index + 1] = i + 1;
+        index += 2;
+
+    }
+
+    printf("\n\n");
+
+    printf("\nValores almacenados en el arreglo j:\n");
+    for (i = 0; i < index; i++) {
+        z+=2;
+        printf("\n\t %s \t --VS--  \t %s \t", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
+        printf("\n\t\t%d de marzo de 2023\n", j[i]);
+        //printf
+    }
+    
+}
