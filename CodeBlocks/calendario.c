@@ -4,11 +4,6 @@
 void imprimirarreglo(int arr[], int tamaño){
     printf("Los valares lamacenados en j: \n\n"); 
 
-    for(){
-
-
-
-    }
 
 
 
@@ -32,7 +27,6 @@ void fechas(int init){
     printf("\nValores almacenados en el arreglo j:\n");
     for (i = 0; i < index; i++) {
         printf("%d ", j[i]);
-        printf
     }
     
 }

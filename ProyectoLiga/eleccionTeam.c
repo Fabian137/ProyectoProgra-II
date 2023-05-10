@@ -15,7 +15,9 @@ struct futbolTeams{
     */
 };
 
+//---------Declaracion de las funciones-------------------------------
 void generarDatos(struct futbolTeams *, int, int *);
+
 void imprimirDatos(struct futbolTeams *, int);
 int idenficadorEquipo(struct futbolTeams *, int , int);
 int aleatorio(int min, int max);
@@ -25,7 +27,7 @@ int filas_CSV();
 // void enfrentamientos(struct futbolTeams *,  int);
 void enfrentamientos(struct futbolTeams *);
 void fechas(struct futbolTeams *, int init, int, int *);
-
+//------------------------------------------------------------------------
 
 
 int main(){
@@ -169,7 +171,7 @@ int filas_CSV(){
 void enfrentamientos(struct futbolTeams *F){
     FILE *archivoIDS;
 
-    archivoIDS = fopen("ID_teams.csv", "r");
+    archivoIDS = fopen("ID_teams.csv", "r+");
     int i, n, id, *id_team; 
     //id es para leer los datos del archivo y *id_team es un arreglo dinámico para guardar los datos de id 
     // id_team = (int *) malloc(n * sizeof(int));
@@ -186,6 +188,9 @@ void enfrentamientos(struct futbolTeams *F){
     }
     printf("\n\n");
     fechas(F, 4, n, id_team);
+    
+
+
 
     for (i = 0; i < n; i+=2){
         //printf("%d -- %d \n", id_team[i], id_team[i+1]);
@@ -213,7 +218,7 @@ void enfrentamientos(struct futbolTeams *F){
         }
         
         }
-        fclose(archivoIDS); 
+    fclose(archivoIDS); 
     }
 
 void fechas(struct futbolTeams *F, int init, int lenght, int ids[lenght]){
@@ -237,8 +242,8 @@ void fechas(struct futbolTeams *F, int init, int lenght, int ids[lenght]){
     printf("\nValores almacenados en el arreglo j:\n");
     for (i = 0; i < index; i++) {
         z+=2;
-        printf("\n\t %s \t --VS--  \t %s \t", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
         printf("\n\t\t%d de marzo de 2023\n", j[i]);
+        printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
         //printf
     }
     
