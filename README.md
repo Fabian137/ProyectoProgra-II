@@ -11,7 +11,7 @@ De lo que escribi a las 01:41am del 10 de may
 El programa hasta ahorita puede hacer enfrentamientos 
 ***NOTA: agregar cómo se hace***
 
-![[notas/SS_20230509_2318.jpg]]
+![Ejemplo de las "rondas"](notas/SS_20230509_2318.jpg)
 
 Puedo llamar a la función de enfrentamientos cuatro veces para que  se llegue a la final de los partidos. Asi que cambie el código para que lo repitiera hasta que ***n*** (valor de filas en el archivo "ID_teams.csv") sea igual a 1. 
 - En este archivo primero se guardan las claves de los equipos del 0 al 15 (16 equipos), la asignación de equipos a estas claves es aleatorio aunque las claves estén ordenadas.
