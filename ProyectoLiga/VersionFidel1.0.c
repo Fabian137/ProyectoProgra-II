@@ -240,7 +240,7 @@ printf("\n\nEL resultado de los endrentamientos de la primera ronda son: \n\n");
 for(i = 0; i < n; i+=2){
   if(F[id_team[i]].goles > F[id_team[i+1]].goles){
     printf("\n\tGana el equipo de: ---%s\n", F[id_team[i]].teamsName);
-    fprintf(archivo_ganadores, "%s,\n",F[id_team[i]].teamsName ); 
+    fprintf(archivos_ids, "%s,\n",F[id_team[i]].teamsName ); 
   }else if(F[id_team[i+1]].goles > F[id_team[i]].goles){
       printf("\n\tGana el equipo de: ---%s\n", F[id_team[i+1]].teamsName);
       fprintf(archivo_ganadores, "%s,\n",F[id_team[i+1]].teamsName );

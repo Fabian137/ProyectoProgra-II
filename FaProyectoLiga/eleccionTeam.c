@@ -27,7 +27,7 @@ void Array_ids(int *, int);
 void escrituraArchivos_Partidos(struct futbolTeams *,int *, int); //Funciona mas de estructura pero mando a llamar iteraciones para no repetir los ciclo for y escribir
 void iteraciones(struct futbolTeams *F, int *arr, int n, char* ); //Imprime el valor de la clave y nombre para ir viendo "Octavos", "Cuartos", etc
 void enfrentamientos(struct futbolTeams *);
-void fechas(struct futbolTeams *, int init, int *);
+void fechas(struct futbolTeams *, int *, int, int, int, int);
 
 
 
@@ -48,7 +48,7 @@ int main(){
     // enfrentamientos(equipo);
 /*
 */
-free(equipo);
+    free(equipo);
 // free(arr); 
 
     return 0;
@@ -85,7 +85,7 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root /* ,int *arr*
     for (j = 0; j < n; j++){
         if (modo == 1){
         
-            printf("\nEntro al if 2 -- Asigna claves y nombres\n");
+        //    printf("\nEntro al if 2 -- Asigna claves y nombres\n");
             if (fscanf(archivo, "%s", teams) != EOF){
                 c=arr[j];
                 strcpy(F[c].teamsName, teams);
@@ -99,7 +99,7 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root /* ,int *arr*
          F[j].faltas = rand() % 4;
         // F[j].faltas = random() % 4;
 
-        printf("\n%d-- %d - %d\n", F[j].clave, F[j].goles, F[j].faltas);
+       // printf("\n%d-- %d - %d\n", F[j].clave, F[j].goles, F[j].faltas);
 
 /*Con estas condiciones pretendo que cuando vuelva a llamar a la funcion
 no cambie de claves a los equipos nuevamente*/
@@ -234,34 +234,41 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
     
     switch (n){
         case 16:
-         cadena = "Partidos/Seleccion.txt";
+            printf("\n Hi");
+            cadena = "Partidos/Seleccion.txt";
             fprintf(archivoPartidos, "\nFilas: %d\n", n);
             fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
+            fechas(F, arr, 16, 4, 3, 31);
         break;
 
         case 8:
-        cadena = "Partidos/Octavos.txt";
-        fprintf(archivoPartidos, "\n--------------------\n");
-        iteraciones(F, arr, n, cadena);
+            cadena = "Partidos/Octavos.txt";
+            fprintf(archivoPartidos, "\n--------------------\n");
+            iteraciones(F, arr, n, cadena);
+            fechas(F, arr, 8, 1, 4, 9);
         break;
 
         case 4:
-        cadena= "Partidos/cuartos.txt";
-        fprintf(archivoPartidos, "\n--------------------\n");
-        iteraciones(F, arr, n, cadena);
+            cadena= "Partidos/cuartos.txt";
+            fprintf(archivoPartidos, "\n--------------------\n");
+            iteraciones(F, arr, n, cadena);
+            fechas(F, arr, 4, 15, 4, 16);
         break;
 
         case 2:
-        cadena = "Partidos/semifinales.txt";
-        fprintf(archivoPartidos, "\n--------------------\n");
-        iteraciones(F, arr, n, cadena);
+            cadena = "Partidos/semifinales.txt";
+            fprintf(archivoPartidos, "\n--------------------\n");
+            iteraciones(F, arr, n, cadena);
+            fechas(F, arr, 2, 22, 4, 22);
+            //fechas(F, 4, arr, 2, );
         break;
 
         case 1:
-        cadena = "Partidos/finales.txt";
-        fprintf(archivoPartidos, "\n--------------------\n");
-        iteraciones(F, arr, n, cadena);
+            cadena = "Partidos/finales.txt";
+            fprintf(archivoPartidos, "\n--------------------\n");
+            iteraciones(F, arr, n, cadena);
+            //fechas(F, 4, arr, 1, );
         break;
 
         default:
@@ -282,7 +289,6 @@ void enfrentamientos(struct futbolTeams *F){
     int root;
     // do{
     while (n != 1){
-        root = time(NULL) + (n/2 + n*n);
         n = filas_CSV();
         id_team = (int *) malloc(n * sizeof(int));
 
@@ -294,15 +300,16 @@ void enfrentamientos(struct futbolTeams *F){
 
         // fechas(F, 4, id_team);
 
-        escrituraArchivos_Partidos(F, id_team, n);
         
         
             //Mando a llamar generarDatos para que por cada ronda genere nuevos datos pero no los modifica
         // generarDatos(F, n, 0, root);
+        escrituraArchivos_Partidos(F, id_team, n);
 
         for (i = 0; i < n; i+=2){
             
             if (F[id_team[i]].goles > F[id_team[i+1]].goles){
+
                 printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i]].teamsName, F[id_team[i]].clave, F[id_team[i]].goles, F[id_team[i]].faltas);
                 fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave);  
                 // generarDatos(F[id_team[i]], n, 0);
@@ -328,6 +335,7 @@ void enfrentamientos(struct futbolTeams *F){
                 }
             }
         }
+        root = time(NULL) + (n/2 + n*n);
         generarDatos(F, n, 0, root);
 
 
@@ -336,14 +344,64 @@ void enfrentamientos(struct futbolTeams *F){
     // } while (n !=1);
 }
 
-void fechas(struct futbolTeams *F, int init, int *ids){
+void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end){
+    /*
+    struct futbolTeams *F = equipo. Arreglo dinámico de estructuras
+    int *ids = Arreglo dinámico de claves que existen en ID_teams para buscar los equipos
+    int n = Para identificar en que ronda estamos
+    int init = En que día inicia el for (sábado)
+    int month = Para saber en qué mes estoy. Y asi imprimirlo en con ayuda de un switch
+    int end = hasta que dia va a llegar el for ()
+
+    En conjunto para poder usar sólo un for y que cambie segun el CASE desde el que lo 
+    estamos llamando.
+        */
     FILE *archivoIDS;
     archivoIDS = fopen("ID_teams.csv", "r");
 
+    printf("\n desde fechas: %d\n", n);
+
     int i, j[8], index=0, z=-2;
 
-    //Este for crea el calendario
-    for (i = init; i <= 31; i += 7) {
+    int *dias;
+
+    dias = (int *) malloc(n * sizeof(int));
+
+    for (i = init; i <= end; i += 7) {
+        // j[index] = i;
+        // j[index + 1] = i + 1;
+        // index += 2;
+
+        dias[index] = i;
+        dias[index + 1] = i + 1;
+        index += 2;
+    }
+
+    for (i = 0; i < index; i++) {
+        z+=2;
+        switch (month){
+            case 3:
+            /* code */
+                printf("\n\t\t%d de marzo de 2023\n", j[i]);
+                printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
+            break;
+
+            case 4:
+                printf("\n\t\t%d de marzo de 2023\n", j[i]);
+                printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
+            break;
+        default:
+            break;
+        }
+        //printf
+    }
+
+/*
+    switch (n){
+    
+        case 16:
+
+        for (i = init; i <= 31; i += 7) {
         j[index] = i;
         j[index + 1] = i + 1;
         index += 2;
@@ -352,12 +410,36 @@ void fechas(struct futbolTeams *F, int init, int *ids){
 
     printf("\n\n");
 
-    printf("\nValores almacenados en el arreglo j:\n");
-    for (i = 0; i < index; i++) {
+        for (i = 0; i < index; i++) {
         z+=2;
         printf("\n\t\t%d de marzo de 2023\n", j[i]);
         printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
         //printf
     }
+        break;
+
+        case 8:
+        printf("EL caso cuando son 8 equipos\n\n");
+        break;
+
+        case 4:
+        printf("EL caso cuando son 4 equipos\n\n");
+        break;
+
+        case 2:
+        printf("EL caso cuando son 2 equipos\n\n");
+        break;
+
+        case 1:
+        printf("EL caso cuando son 1 equipos\n\n");
+        break;
     
+    default:
+    break;
+    
+    }
+*/
+
+
+
 }
