@@ -97,7 +97,7 @@ void generarDatos(struct futbolTeams *F, int n, int modo /* ,int *arr*/){
 
 /*Con estas condiciones pretendo que cuando vuelva a llamar a la funcion
 no cambie de claves a los equipos nuevamente*/
-        if (F[j].clave = j){
+        if (F[j].clave == j){
         F[j].clave = j;
         }
         else{
