@@ -382,12 +382,12 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
         switch (month){
             case 3:
             /* code */
-                printf("\n\t\t%d de marzo de 2023\n", j[i]);
+                printf("\n\t\t%d de marzo de 2023\n", dias[i]);
                 printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
             break;
 
             case 4:
-                printf("\n\t\t%d de marzo de 2023\n", j[i]);
+                printf("\n\t\t%d de abril de 2023\n", dias[i]);
                 printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
             break;
         default:
