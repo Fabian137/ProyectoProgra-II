@@ -265,8 +265,9 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
 
 void enfrentamientos(struct futbolTeams *F){
     FILE *archivoIDS;
+    FILE *history;
 
-    int i, n, id, *id_team;
+    int i, n, id, *id_team, pi=3.14159265359;
     //id es para leer los datos del archivo y *id_team es un arreglo dinámico para guardar los datos de id 
     // id_team = (int *) malloc(n * sizeof(int));
     // n=16;
@@ -281,27 +282,21 @@ void enfrentamientos(struct futbolTeams *F){
         Array_ids(id_team, n);
 
         archivoIDS = fopen("ID_teams.csv", "w");
-
-        // fechas(F, 4, id_team);
-
-        
-        
             //Mando a llamar generarDatos para que por cada ronda genere nuevos datos pero no los modifica
         // generarDatos(F, n, 0, root);
         escrituraArchivos_Partidos(F, id_team, n);
-
+        // root = time(NULL) + (n/2 + n*n);
+        // generarDatos(F, n, 0, root);
         for (i = 0; i < n; i+=2){
             
             if (F[id_team[i]].goles > F[id_team[i+1]].goles){
-
                 printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i]].teamsName, F[id_team[i]].clave, F[id_team[i]].goles, F[id_team[i]].faltas);
                 fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave);  
-                // generarDatos(F[id_team[i]], n, 0);
+
             }
             else if (F[id_team[i+1]].goles > F[id_team[i]].goles){
                 printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i+1]].teamsName, F[id_team[i+1]].clave, F[id_team[i+1]].goles, F[id_team[i+1]].faltas);
-                fprintf(archivoIDS, "%d,\n", F[id_team[i+1]].clave);  
-                // generarDatos(F[id_team[i]], n, 0);
+                fprintf(archivoIDS, "%d,\n", F[id_team[i+1]].clave); 
             }
             else{
                 if (F[id_team[i]].faltas > F[id_team[i+1]].faltas){
@@ -310,22 +305,36 @@ void enfrentamientos(struct futbolTeams *F){
                 }
                 else if (F[id_team[i+1]].faltas > F[id_team[i]].faltas){
                     printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i]].teamsName, F[id_team[i]].clave, F[id_team[i]].goles, F[id_team[i]].faltas);
-                    fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave);  
+                    fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave);
                       
                 }
                 else{
                     printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i]].teamsName, F[id_team[i]].clave, F[id_team[i]].goles, F[id_team[i]].faltas);
-                    fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave);  
+                    fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave); 
                 }
             }
         }
-        root = time(NULL) + (n/2 + n*n);
-        generarDatos(F, n, 0, root);
-
+        // root = time(NULL) + (n/2 + n*(n*pi) );
+        // generarDatos(F, n, 0, root);
+            root = (time(NULL) + (n*pi)) * (id_team[n-1]*id_team[n-1]);
+            generarDatos(F, n, 0, root);
 
         fclose(archivoIDS);
     }
-    // } while (n !=1);
+    // } while (n !=2);
+
+        n = filas_CSV();
+        id_team = (int *) malloc(n * sizeof(int));
+        Array_ids(id_team, n);
+        printf("\n\n\n\n\t\t\t %s \n\n\n", F[id_team[0]].teamsName);
+
+        history = fopen("Partidos/campeones.txt", "a");
+
+            // cadena = "Partidos/finales.txt";
+            fprintf(history, "\n--------------------\n \t %s", F[id_team[0]].teamsName);
+            // iteraciones(F, arr, n, cadena);
+            //fechas(F, 4, arr, 1, );
+        
 }
 
 void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end){
@@ -375,14 +384,19 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
         z+=2;
         switch (month){
             case 3:
-            /* code */
                 printf("\n\t\t%d de marzo de 2023\n", dias[i]);
-                printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
+                printf("\n\t %s \t --VS-- \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
             break;
 
             case 4:
-                printf("\n\t\t%d de abril de 2023\n", dias[i]);
-                printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
+                if(dias[i] > 31){
+                    printf("\n");
+                    // Asi evitamos esa especie de fecha que se genera extra 
+                }
+                else{
+                    printf("\n\t\t %d de abril de 2023\n", dias[i]);
+                    printf("\n\t %s \t --VS-- \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
+                }
             break;
         default:
             break;

@@ -1,9 +1,9 @@
 
- 0 ---- China -- G:4 -- F:0
- 3 ---- Yemen -- G:5 -- F:1
- 5 ---- Philippines -- G:1 -- F:3
- 6 ---- Perú -- G:4 -- F:1
- 9 ---- Japon -- G:4 -- F:0
- 10 ---- Indonesia -- G:0 -- F:3
- 13 ---- Paraguay -- G:4 -- F:2
- 15 ---- Finland -- G:3 -- F:1
+ 1 ---- Philippines -- G:4 -- F:0
+ 2 ---- Indonesia -- G:5 -- F:0
+ 4 ---- Suiza -- G:3 -- F:0
+ 7 ---- Rusia -- G:1 -- F:3
+ 8 ---- España -- G:2 -- F:2
+ 10 ---- Uruguay -- G:1 -- F:1
+ 13 ---- Yemen -- G:4 -- F:3
+ 14 ---- Poland -- G:1 -- F:3
