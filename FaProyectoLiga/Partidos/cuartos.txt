@@ -1,5 +1,5 @@
 
- 2 ---- Indonesia -- G:1 -- F:2
- 4 ---- Suiza -- G:1 -- F:1
- 8 ---- España -- G:2 -- F:2
- 13 ---- Yemen -- G:4 -- F:3
+ 0 ---- Indonesia -- G:0 -- F:0
+ 4 ---- Poland -- G:0 -- F:0
+ 8 ---- Perú -- G:0 -- F:0
+ 12 ---- Nepal -- G:0 -- F:0
