@@ -1,11 +1,11 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include<string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include <time.h>
 
 struct futbolTeams{
     char teamsName[20], D_Tecnico[20], Capitan[10], MVP[10];
-    int clave, n_jugadores, goles, faltas, ganadas, perdidas, numRand, NumCampeon;
+    int clave, n_jugadores, goles, faltas, ganadas, perdidas, NumCampeon;
     /*
       clave -       para identificar el equipo sin usar el nombre. teamsName
     ! numRand -     No sé si se sigue necesitando . . .
@@ -22,7 +22,6 @@ int aleatorio(int min, int max);
 void generararreglo(int numeroequipos, int *arr);
 
 int filas_CSV();
-// void enfrentamientos(struct futbolTeams *,  int);
 void Array_ids(int *, int);
 void escrituraArchivos_Partidos(struct futbolTeams *,int *, int); //Funciona mas de estructura pero mando a llamar iteraciones para no repetir los ciclo for y escribir
 void iteraciones(struct futbolTeams *F, int *arr, int n, char* ); //Imprime el valor de la clave y nombre para ir viendo "Octavos", "Cuartos", etc
@@ -34,6 +33,7 @@ void fechas(struct futbolTeams *, int *, int, int, int, int);
 int main(){
     struct futbolTeams *equipo;
     int i, indicealeatorio, temporal, n=16;
+
     equipo = (struct futbolTeams *) malloc(n * sizeof(struct futbolTeams));
     // n = 8; 
     // int arr[8];
@@ -95,21 +95,7 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root /* ,int *arr*
         
         F[j].n_jugadores = 11;
          F[j].goles = rand() % 6;
-        // F[j].goles = random() % 6;
          F[j].faltas = rand() % 4;
-        // F[j].faltas = random() % 4;
-
-       // printf("\n%d-- %d - %d\n", F[j].clave, F[j].goles, F[j].faltas);
-
-/*Con estas condiciones pretendo que cuando vuelva a llamar a la funcion
-no cambie de claves a los equipos nuevamente*/
-
-        // if (F[j].clave = j){
-        // F[j].clave = j;
-        // }
-        // else{
-        //     F[j].clave = j;
-        // }
         
     }
 
@@ -125,7 +111,7 @@ void imprimirDatos(struct futbolTeams *F, int n){
     archivo_Infos = fopen("ID_teams.txt", "w");
     archivo_ids = fopen("ID_teams.csv", "w");
 
-    for ( i = 0; i < n; i++){
+    for ( i = 0; i < n; i++){   
         /*
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
         printf("\n\t\tclave de equipo: %d", F[i].clave);
@@ -172,17 +158,10 @@ int filas_CSV(){
     FILE *archivoIDS;
     archivoIDS = fopen("ID_teams.csv", "r");
     int id, i=0;
-
     
     while (fscanf(archivoIDS, "%d,", &id) != EOF){
         i++;
     }
-    /*
-    Con el while solo leo la cantidad de variables que existe, para asi saber el numero de filas y por ende número de interaciones que necesito. Para asi hacer los enfrentamientos
-    */
-    /*
-    Este for es para guardar */
-
 
     fclose(archivoIDS); 
     return i;
@@ -204,7 +183,6 @@ void Array_ids(int *arr, int n){
         }
     }
     printf("\n\n");
-
     
     fclose(archivoIDS);
 
@@ -215,7 +193,6 @@ void iteraciones(struct futbolTeams *F, int *arr, int n, char* cadena){
     int i, id;
 
     archivoPartidos = fopen(cadena, "w");
-
     
     for ( i = 0; i < n; i++){
         id = arr[i];
@@ -230,11 +207,16 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
     // char cadena[] = "Hola mundo";
     char *cadena;
         cadena = (char *) malloc(25 * sizeof(char));
+        
+        // // cadena = n+""
+        // cadena = "Partidos/Octavos.txt";
+        //     fprintf(archivoPartidos, "\n--------------------\n");
+        //     iteraciones(F, arr, n, cadena);
+        //     fechas(F, arr, 8, 1, 4, 9);
     
     
     switch (n){
         case 16:
-            printf("\n Hi");
             cadena = "Partidos/Seleccion.txt";
             fprintf(archivoPartidos, "\nFilas: %d\n", n);
             fprintf(archivoPartidos, "\n--------------------\n");
@@ -264,12 +246,14 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
             //fechas(F, 4, arr, 2, );
         break;
 
+        /*
         case 1:
             cadena = "Partidos/finales.txt";
             fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
             //fechas(F, 4, arr, 1, );
         break;
+        */
 
         default:
         break;
@@ -285,10 +269,10 @@ void enfrentamientos(struct futbolTeams *F){
     int i, n, id, *id_team;
     //id es para leer los datos del archivo y *id_team es un arreglo dinámico para guardar los datos de id 
     // id_team = (int *) malloc(n * sizeof(int));
-    n=16;
+    // n=16;
     int root;
     // do{
-    while (n != 1){
+    while (n != 2){
         n = filas_CSV();
         id_team = (int *) malloc(n * sizeof(int));
 
@@ -372,9 +356,19 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
         // j[index + 1] = i + 1;
         // index += 2;
 
-        dias[index] = i;
-        dias[index + 1] = i + 1;
-        index += 2;
+        // init == end ? 
+        if (init != end){
+            dias[index] = i;
+            dias[index + 1] = i + 1;
+            index += 2;
+        }
+        else{
+            dias[index] = i;
+            index += 2;
+        
+        }
+    
+        
     }
 
     for (i = 0; i < index; i++) {
@@ -393,53 +387,7 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
         default:
             break;
         }
-        //printf
     }
-
-/*
-    switch (n){
-    
-        case 16:
-
-        for (i = init; i <= 31; i += 7) {
-        j[index] = i;
-        j[index + 1] = i + 1;
-        index += 2;
-
-    }
-
-    printf("\n\n");
-
-        for (i = 0; i < index; i++) {
-        z+=2;
-        printf("\n\t\t%d de marzo de 2023\n", j[i]);
-        printf("\n\t %s \t --VS--  \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
-        //printf
-    }
-        break;
-
-        case 8:
-        printf("EL caso cuando son 8 equipos\n\n");
-        break;
-
-        case 4:
-        printf("EL caso cuando son 4 equipos\n\n");
-        break;
-
-        case 2:
-        printf("EL caso cuando son 2 equipos\n\n");
-        break;
-
-        case 1:
-        printf("EL caso cuando son 1 equipos\n\n");
-        break;
-    
-    default:
-    break;
-    
-    }
-*/
-
 
 
 }

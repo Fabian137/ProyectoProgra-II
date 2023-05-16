@@ -1,5 +1,5 @@
 
- 2 ---- Mexico -- G:1 -- F:3
- 4 ---- Paraguay -- G:0 -- F:2
- 11 ---- Nepal -- G:3 -- F:0
- 12 ---- Japon -- G:1 -- F:1
+ 3 ---- Yemen -- G:1 -- F:1
+ 6 ---- Perú -- G:5 -- F:0
+ 9 ---- Japon -- G:4 -- F:0
+ 13 ---- Paraguay -- G:4 -- F:2
