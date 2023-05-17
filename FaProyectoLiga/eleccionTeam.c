@@ -53,7 +53,7 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
     FILE *archNombres;
     FILE *archDTec;
     
-    int i, c=0, k=0, j, MAX_LENGTH=40;
+    int i, c=0, a=-1, k=-1, j, MAX_LENGTH=40;
     int *arr;
     char teams[20], nombre[MAX_LENGTH], dtec[40];
 
@@ -94,8 +94,8 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
         }
 
         while (fgets(nombre, MAX_LENGTH, archNombres) != NULL) {
-            c++;
-            strcpy(F[c].Capitan, nombre);
+            a++;
+            strcpy(F[a].Capitan, nombre);
             // printf("Nombre completo: %s", nombre);
         }
         while (fgets(nombre, MAX_LENGTH, archDTec) != NULL) {
