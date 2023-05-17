@@ -98,23 +98,6 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
             strcpy(F[k].D_Tecnico, nombre);
             // printf("Nombre completo: %s", nombre);
         }
-        /*
-        for (i = 0; i < n; i++){
-            if (fscanf(archNombres, "%s,", nombre) != EOF){
-                    c=arr[i];
-                    strcpy(F[c].Capitan, nombre);
-            }
-        }
-
-        for (i = 0; i < n; i++){
-            if (fscanf(archDTec, "%s,", dtec) != EOF){
-                    c=arr[i];
-                    strcpy(F[c].D_Tecnico, dtec);
-            }
-        }
-
-        */
-
     }
     for (i = 0; i < n; i++){
         F[i].n_jugadores = 11;
@@ -405,11 +388,12 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
             break;
 
             case 4:
-                if(dias[i] > 31 && dias[i] < 0){
-                    printf("\n");
+                if(dias[i] > 31){
+                    printf("\n /_");
                     // Asi evitamos esa especie de fecha que se genera extra 
                 }
                 else{
+                    // printf("\n ---/_");
                     printf("\n\t\t %d de abril de 2023\n", dias[i]);
                     printf("\n\t %s \t --VS-- \t %s \t\n\n", F[ids[z]].teamsName, F[ids[z+1]].teamsName);
                 }
