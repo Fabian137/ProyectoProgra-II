@@ -3,58 +3,53 @@
 #include <string.h>
 #include <time.h>
 
-// #include "FuncionesPrototipos.h"
-
 struct futbolTeams{
     char teamsName[20], D_Tecnico[40], Capitan[40];
-    int clave, n_jugadores, goles, faltas, NumCampeon, ganadas;
+    int clave, n_jugadores, goles, faltas, NumCampeon;
 
 };
 
-
 void generarDatos(struct futbolTeams *, int, int, int);
-void imprimirDatos(struct futbolTeams *, int, int, int);
+void imprimirDatos(struct futbolTeams *, int);
 int idenficadorEquipo(struct futbolTeams *, int , int);
 int aleatorio(int min, int max);
 void generararreglo(int numeroequipos, int *arr);
 
-int filas_CSV(char* c);
+int filas_CSV();
 void Array_ids(int *, int);
 void escrituraArchivos_Partidos(struct futbolTeams *,int *, int); 
 void iteraciones(struct futbolTeams *F, int *arr, int n, char* ); 
 void enfrentamientos(struct futbolTeams *);
 void fechas(struct futbolTeams *, int *, int, int, int, int);
-int maxChampion(struct futbolTeams *F);
 
-void composer(struct futbolTeams *F);
-int menu(struct futbolTeams *F);
 void caratula();
-
+int menu();
 
 
 
 int main(){
+
     struct futbolTeams *equipo;
-    int i, opcion, n;
+    int i, indicealeatorio, temporal, n=16;
+    equipo = (struct futbolTeams *) malloc(n * sizeof(struct futbolTeams));
+   
     char respuesta;
 
-    printf("\n--%d--\n",n);
-
+    caratula();
+    printf("\n\n\n");
+    
     do{
-        n=16;
-            printf("\n--%d--\n",n);
     int root = time(NULL);
 
-    equipo = (struct futbolTeams *) malloc(n * sizeof(struct futbolTeams));
-
     generarDatos(equipo, n, 1, root);
-        printf("\n--%d--\n",n);
+
+    imprimirDatos(equipo, n);
 
     enfrentamientos(equipo);
 
-    // composer(equipo);
-    // opcion = menu(equipo);
 
+    //menu();
+    
     printf("\nOtra ligaa [S/N]\n ");
 	scanf(" %c", &respuesta);
     } while(respuesta == 's' || respuesta == 'S');
@@ -62,7 +57,6 @@ int main(){
     free(equipo);
 
     return 0;
-
 }
 
 void generarDatos(struct futbolTeams *F, int n, int modo, int root){
@@ -104,14 +98,13 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
             if (fscanf(archivo, "%s", teams) != EOF){
                     strcpy(F[c].teamsName, teams);
             }
-            // F[j].NumCampeon = 0;
-            F[j].ganadas = 0;
             F[j].clave = j;
         }
 
         while (fgets(nombre, MAX_LENGTH, archNombres) != NULL) {
             a++;
             strcpy(F[a].Capitan, nombre);
+            // printf("Nombre completo: %s", nombre);
         }
         while (fgets(nombre, MAX_LENGTH, archDTec) != NULL) {
             k++;
@@ -125,6 +118,8 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
         F[i].faltas = rand() % 4;
 
     }
+
+
     free(arr); 
 
     fclose(archivo);
@@ -133,29 +128,27 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
     
 }
 
-void imprimirDatos(struct futbolTeams *F,int init, int n, int modo){
+void imprimirDatos(struct futbolTeams *F, int n){
     int i;
     FILE *archivo_Infos;
     FILE *archivo_ids;
     archivo_Infos = fopen("data/ID_teams.txt", "w");
     archivo_ids = fopen("data/ID_teams.csv", "w");
 
-    for ( i = init; i < n; i++){   
-        if (modo == 1){
-            
+    for ( i = 0; i < n; i++){   
+        
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
-        printf("\n\tDirector Tecnico: %s", F[i].D_Tecnico);
+        printf("\n\n\t\tclave de equipo: %d", F[i].clave);
+        printf("\n\n\tDirector Tecnico: %s", F[i].D_Tecnico);
         printf("\n\tCapitan: %s", F[i].Capitan);
        
         printf("\n\tNumero de jugadores: %d", F[i].n_jugadores);
 
-        printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
+        printf("\n\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
         
-        // fprintf(archivo_Infos, "%d, %d, %s  ---- G: %d ---- F: %d\n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
-        fprintf(archivo_Infos, "%s - %d\n", F[i].teamsName, F[i].clave);
+    
+        fprintf(archivo_Infos, "%d, %d, %s  ---- G: %d ---- F: %d\n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
         fprintf(archivo_ids, "%d, \n", F[i].clave);
-        }
-        printf("\n\t\tclave del equipo: %s - %d", F[i].teamsName, F[i].clave);
     }
     fclose(archivo_Infos);
     fclose(archivo_ids);
@@ -178,20 +171,21 @@ void generararreglo(int n, int *arr){
         temporal = arr[i];
         arr[i] = arr[indicealeatorio];
         arr[indicealeatorio] = temporal; 
+
     }
     
 }
 
-int filas_CSV(char* cadena){
-    FILE *archivo;
-    archivo = fopen(cadena, "r");
+int filas_CSV(){
+    FILE *archivoIDS;
+    archivoIDS = fopen("data/ID_teams.csv", "r");
     int id, i=0;
     
-    while (fscanf(archivo, "%d,", &id) != EOF){
+    while (fscanf(archivoIDS, "%d,", &id) != EOF){
         i++;
     }
 
-    fclose(archivo); 
+    fclose(archivoIDS); 
     return i;
     
 }
@@ -210,56 +204,54 @@ void Array_ids(int *arr, int n){
         }
     }
     printf("\n\n");
+    
     fclose(archivoIDS);
+
 }
 
 void iteraciones(struct futbolTeams *F, int *arr, int n, char* cadena){
     FILE *archivoPartidos;
     int i, id;
+
     archivoPartidos = fopen(cadena, "w");
     
     for ( i = 0; i < n; i++){
         id = arr[i];
         fprintf(archivoPartidos, "\n %d ---- %s -- G:%d -- F:%d", F[id].clave, F[id].teamsName, F[id].goles, F[id].faltas);
     }
+
 }
 
 void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
-    FILE *archivoPartidos;
-    archivoPartidos = fopen("Partidos/General_matches.txt", "w");
-   
     char *cadena;
-        cadena = (char *) malloc(25 * sizeof(char));
-    
+    cadena = (char *) malloc(40 * sizeof(char));
+        
     switch (n){
         case 16:
             cadena = "Partidos/Seleccion.txt";
-            fprintf(archivoPartidos, "\nFilas: %d\n", n);
-            fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
             fechas(F, arr, 16, 4, 3, 31);
         break;
 
         case 8:
             cadena = "Partidos/Octavos.txt";
-            fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
             fechas(F, arr, 8, 1, 4, 9);
         break;
 
         case 4:
             cadena= "Partidos/cuartos.txt";
-            fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
             fechas(F, arr, 4, 15, 4, 16);
         break;
 
         case 2:
             cadena = "Partidos/semifinales.txt";
-            fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
             fechas(F, arr, 2, 22, 4, 22);
         break;
+
+
         default:
         break;
     }
@@ -272,17 +264,15 @@ void enfrentamientos(struct futbolTeams *F){
     FILE *archivoIDS;
     FILE *history;
 
-    int i, n=16, id, *id_team; 
+    int i, n, id, *id_team; 
     float pi=3.14159265359;
-        printf("\n--%d--\n",n);
+
     int root;
-    char string[] = "data/ID_teams.csv";
+ 
     while (n != 2){
-        n = filas_CSV(string);
+        n = filas_CSV();
         id_team = (int *) malloc(n * sizeof(int));
 
-        printf("\n FILAS:%d", n);        
-    printf("\n--%d--\n",n);
         Array_ids(id_team, n);
 
         archivoIDS = fopen("data/ID_teams.csv", "w");
@@ -294,30 +284,25 @@ void enfrentamientos(struct futbolTeams *F){
             if (F[id_team[i]].goles > F[id_team[i+1]].goles){
                 printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i]].teamsName, F[id_team[i]].clave, F[id_team[i]].goles, F[id_team[i]].faltas);
                 fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave);  
-                F[id_team[i]].ganadas++;
 
             }
             else if (F[id_team[i+1]].goles > F[id_team[i]].goles){
                 printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i+1]].teamsName, F[id_team[i+1]].clave, F[id_team[i+1]].goles, F[id_team[i+1]].faltas);
                 fprintf(archivoIDS, "%d,\n", F[id_team[i+1]].clave); 
-                F[id_team[i+1]].ganadas++;
             }
             else{
                 if (F[id_team[i]].faltas > F[id_team[i+1]].faltas){
                     printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i+1]].teamsName, F[id_team[i+1]].clave, F[id_team[i+1]].goles, F[id_team[i+1]].faltas);
                     fprintf(archivoIDS, "%d,\n", F[id_team[i+1]].clave);
-                    F[id_team[i+1]].ganadas++;
                 }
                 else if (F[id_team[i+1]].faltas > F[id_team[i]].faltas){
                     printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i]].teamsName, F[id_team[i]].clave, F[id_team[i]].goles, F[id_team[i]].faltas);
                     fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave);
-                    F[id_team[i]].ganadas++;
                       
                 }
                 else{
                     printf("\n\tGana el equipo de: ---%s : %d  G:%d - F:%d \n", F[id_team[i]].teamsName, F[id_team[i]].clave, F[id_team[i]].goles, F[id_team[i]].faltas);
                     fprintf(archivoIDS, "%d,\n", F[id_team[i]].clave); 
-                    F[id_team[i]].ganadas++;
                 }
             }
         }
@@ -329,7 +314,7 @@ void enfrentamientos(struct futbolTeams *F){
     }
 
 
-        n = filas_CSV(string);
+        n = filas_CSV();
         id_team = (int *) malloc(n * sizeof(int));
         Array_ids(id_team, n);
         printf("\n\n\n\n\t\t\t %s \n\n\n", F[id_team[0]].teamsName);
@@ -338,8 +323,6 @@ void enfrentamientos(struct futbolTeams *F){
 
             
             fprintf(history, "%s,\n", F[id_team[0]].teamsName);
-            F[id_team[0]].NumCampeon++;
-            // printf("\n %s -- %d\n", F[id_team[0]].teamsName, F[id_team[0]].NumCampeon);
             // iteraciones(F, arr, n, cadena);
             //fechas(F, 4, arr, 1, );
         
@@ -360,8 +343,6 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
     FILE *archivoIDS;
     archivoIDS = fopen("data/ID_teams.csv", "r");
 
-    printf("\n desde fechas: %d\n", n);
-
     int i, j[8], index=0, z=-2;
 
     int *dias;
@@ -379,6 +360,8 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
             index += 2;
         
         }
+    
+        
     }
 
     for (i = 0; i < index; i++) {
@@ -390,7 +373,7 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
             break;
 
             case 4:
-                if(dias[i] > 31){
+                if(dias[i] >23){
                     printf("\n");
                     // Asi evitamos esa especie de fecha que se genera extra 
                 }
@@ -404,44 +387,8 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
             break;
         }
     }
-}
 
-int maxChampion(struct futbolTeams *F){
-    int i, n=16;
-    int max = 0;
-    // char cadena[30] = "Partidos/campeones.csv";
-    // n = filas_CSV("Partidos/campeones.csv");
-    /*
 
-    char string[10];
-    FILE *archivo;
-    archivo = fopen("Partidos/campeones.csv", "r");
-
-    while (fscanf(archivo, "%s,", string) != EOF){
-        n++;
-    }
-
-    */
-    // return i;
-    
-
-    for (i = 0; i < n; i++) {
-        if (F[i].NumCampeon > max) {
-            max = F[i].NumCampeon;
-        }
-    }
-    // fclose(archivo); 
-   return max;
-    
-}
-
-int idenficadorEquipo(struct futbolTeams *F, int n, int clave){
-    int i;
-    for (i = 0; i < n; i++){
-        if (clave == F[i].clave){
-            return i;
-        }
-    }
 }
 
 void caratula(){
@@ -455,64 +402,15 @@ void caratula(){
     printf("\n\t - Veizaga Pinto Frida          - 423490440");
     printf("\n\t - Díaz Valdez Gilberto Fidel   - 320324280");
     printf("\n\t - Pablo Cesar Tapia Becerril   - 423089662");
-
     
 
 
 }
+/*
 
-void composer(struct futbolTeams *F){
-    int opcion, teamID, id, MAX_LENGTH = 10;
-    char respuesta, campeon[MAX_LENGTH];
+int menu(){
 
-
-    FILE *arch;
-    do{
-
-        opcion = menu(F);
-        // while(opcion!=7){
-        switch (opcion){
-        case 1:
-            printf("\n\nIngresa la clave del equipo que deseas ver: \n");
-            imprimirDatos(F, 0, 16, 0);
-            printf("\n");
-            scanf("%d", &id);
-            teamID = idenficadorEquipo(F, 16, id);
-            imprimirDatos(F,teamID-1, teamID, 1);
-            break;
-
-        case 2:
-            imprimirDatos(F, 0, 16, 1);
-            break;
-        
-        case 3:
-            arch = fopen("Partidos/campeones.csv", "w");
-            fclose(arch);
-            break;
-
-        case 4:
-            arch = fopen("Partidos/campeones.csv", "r");
-            while (fgets(campeon, MAX_LENGTH, arch) != NULL) {
-                printf("\nCampeones: %s\n", campeon);
-            }
-        break;
-
-
-        default:
-            break;
-        }
-
-    printf("\nHacer otra consulta/operacion [S/N]\n ");
-	scanf(" %c", &respuesta);
-    } while(respuesta == 's' || respuesta == 'S');
-    // }
-    fclose(arch);
-
-}
-
-int menu(struct futbolTeams *F){
 int opcion;
-
     printf("\n\n\t -- Elige una opcion si quieres hacer una consulta --");
     // printf("\n\n\t 1) El equipo con mayor número de campeonatos");
     printf("\n\n\t 1) Información detallada de un equipo");
@@ -520,8 +418,11 @@ int opcion;
     // printf("\n\n\t 4) Partidos ganados de un equipo");
     printf("\n\n\t 3) Reiniciar Historial de campeones");
     printf("\n\n\t 4) Mostrar Historial de campeones\n");
-    
-    printf("\n\tOpcion: ");
+    printf("\n\n\t 5) Salir\n");
+
     scanf("%d", &opcion);
+
+
     return opcion; 
 }
+*/
