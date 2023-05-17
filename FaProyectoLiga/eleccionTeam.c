@@ -22,6 +22,9 @@ void iteraciones(struct futbolTeams *F, int *arr, int n, char* );
 void enfrentamientos(struct futbolTeams *);
 void fechas(struct futbolTeams *, int *, int, int, int, int);
 
+void caratula();
+int menu();
+
 
 
 int main(){
@@ -34,6 +37,9 @@ int main(){
    
     int root = time(NULL);
 
+    caratula(); 
+
+
     generarDatos(equipo, n, 1, root);
 
     imprimirDatos(equipo, n);
@@ -41,6 +47,9 @@ int main(){
     enfrentamientos(equipo);
 
     free(equipo);
+
+    menu();
+
 
     return 0;
 
@@ -142,13 +151,13 @@ void imprimirDatos(struct futbolTeams *F, int n){
     for ( i = 0; i < n; i++){   
         
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
-        printf("\n\t\tclave de equipo: %d", F[i].clave);
-        printf("\n\tDirector Tecnico: %s", F[i].D_Tecnico);
+        printf("\n\n\t\tclave de equipo: %d", F[i].clave);
+        printf("\n\n\tDirector Tecnico: %s", F[i].D_Tecnico);
         printf("\n\tCapitan: %s", F[i].Capitan);
        
         printf("\n\tNumero de jugadores: %d", F[i].n_jugadores);
 
-        printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
+        printf("\n\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
         
     
         fprintf(archivo_Infos, "%d, %d, %s  ---- G: %d ---- F: %d\n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
@@ -420,4 +429,63 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
     }
 
 
+}
+
+void caratula(){
+    printf("\n\n\t\t\t \033[38;5;31m \033[1m--------- || PROYECTO || --------- \n \t\t\t\t   -Liga de fútbol- \033[1m \033[0m\n");
+    // printf("\n\n\t\t\t  \033[38;5;31mTexto en rojo\033[0m\n \n \t\t\t-Liga de fútbol");
+    printf("\n\n\t\t Pogramación II");
+    printf("\n\t\t Profesora: Alma López Blanco");
+
+    printf("\n\n\t Integrantes");
+    printf("\n\t - Beltrán Isidro Carlos Fabián");
+    printf("\n\t - Veizaga Pinto Frida");
+    printf("\n\t - Díaz Valdez Gilberto Fidel");
+
+    
+
+
+}
+
+int menu(){
+
+int opcion;
+
+while(opcion!=5){
+
+
+    printf("\n\n\t Elige una opcion si quieres una consulta: ");
+    printf("\n\n\t 1) El equipo con mayor número de campeonatos");
+    printf("\n\n\t 2) Información detallada de un equipo");
+    printf("\n\n\t 3) Información detallada de todos los equipos");
+    printf("\n\n\t 4) Partidos ganados");
+    printf("\n\n\t 5) Salir");
+
+    scanf("\n\n%d", &opcion);
+                
+       switch (opcion){
+   case 1:
+    printf("\n\nLO que se que tenga que hacer en la opcion 1");
+    break;
+   case 2:
+    printf("\n\nLO que se que tenga que hacer en la opcion 2");
+    break;
+    case 3:
+    printf("\n\nLO que se que tenga que hacer en la opcion 3");
+    break;
+    case 4:
+    printf("\n\nLO que se que tenga que hacer en la opcion 4");
+    break;
+    case 5:
+    printf("\n\nSe acaba el programa cuando digitas 5");
+    break;
+
+
+   default:
+    break;
+   }
+
+
+}
+    return opcion; 
 }

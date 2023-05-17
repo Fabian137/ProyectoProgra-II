@@ -1,12 +1,5 @@
 
-<<<<<<< HEAD
- 0 ---- Uruguay -- G:1 -- F:1
- 4 ---- Suiza -- G:0 -- F:0
- 8 ---- Yemen -- G:0 -- F:0
- 12 ---- Philippines -- G:0 -- F:0
-=======
- 2 ---- Japon -- G:4 -- F:0
- 4 ---- Nepal -- G:5 -- F:1
- 8 ---- Poland -- G:3 -- F:3
- 14 ---- Yemen -- G:2 -- F:2
->>>>>>> 74a0b141654601f4bc55f3aa12224d26eeded363
+ 2 ---- Uruguay -- G:4 -- F:0
+ 4 ---- Perú -- G:5 -- F:1
+ 10 ---- China -- G:3 -- F:1
+ 13 ---- Suiza -- G:3 -- F:2
