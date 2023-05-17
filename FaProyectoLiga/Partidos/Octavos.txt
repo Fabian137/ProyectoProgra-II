@@ -1,9 +1,9 @@
 
- 0 ---- Suiza -- G:0 -- F:0
- 2 ---- Paraguay -- G:0 -- F:0
- 4 ---- Japon -- G:0 -- F:0
- 6 ---- Mexico -- G:0 -- F:0
- 8 ---- Indonesia -- G:0 -- F:0
- 10 ---- España -- G:0 -- F:0
- 12 ---- Philippines -- G:0 -- F:0
- 14 ---- Nepal -- G:1 -- F:0
+ 0 ---- Finland -- G:1 -- F:0
+ 2 ---- Japon -- G:4 -- F:0
+ 4 ---- Nepal -- G:5 -- F:1
+ 6 ---- España -- G:1 -- F:0
+ 8 ---- Poland -- G:3 -- F:3
+ 10 ---- Suiza -- G:2 -- F:3
+ 12 ---- Perú -- G:1 -- F:0
+ 14 ---- Yemen -- G:2 -- F:2
