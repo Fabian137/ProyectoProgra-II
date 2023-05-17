@@ -37,7 +37,7 @@ int main(){
    
     int root = time(NULL);
 
-    caratula(); 
+    //caratula(); 
 
 
     generarDatos(equipo, n, 1, root);
@@ -48,7 +48,7 @@ int main(){
 
     free(equipo);
 
-    menu();
+    //menu();
 
 
     return 0;
@@ -223,7 +223,7 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
     archivoPartidos = fopen("Partidos/General_matches.txt", "w");
    
     char *cadena;
-        cadena = (char *) malloc(25 * sizeof(char));
+        cadena = (char *) malloc(40 * sizeof(char));
         
 
     
@@ -254,17 +254,18 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
             cadena = "Partidos/semifinales.txt";
             fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
-            fechas(F, arr, 2, 22, 4, 22);
+            fechas(F, arr, 2, 22, 4, 23);
             //fechas(F, 4, arr, 2, );
         break;
 
-        /*
         case 1:
             cadena = "Partidos/finales.txt";
             fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
             //fechas(F, 4, arr, 1, );
         break;
+        
+        /*
         */
 
         default:
@@ -397,7 +398,7 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
             break;
 
             case 4:
-                if(dias[i] > 31){
+                if(dias[i] ==23){
                     printf("\n /_");
                     // Asi evitamos esa especie de fecha que se genera extra 
                 }
