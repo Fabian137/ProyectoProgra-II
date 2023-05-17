@@ -74,16 +74,11 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
     }
 
 
+    if (modo == 1){
 //-------------Fragmento que mezcla los datos ------------------------------
-    if (modo == 1){
         generararreglo(n, arr);
-        printf("\nEntro al if -- genera arreglo\n");
-    }
-    
-//----------------------Aqui termina----------------------------------------
-
-    if (modo == 1){
         
+//----------------------Aqui termina----------------------------------------
         for (j = 0; j < n; j++){
                 c=arr[j];
 
@@ -121,12 +116,13 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
         */
 
     }
+    for (i = 0; i < n; i++){
+        F[i].n_jugadores = 11;
+        F[i].goles = rand() % 6;
+        F[i].faltas = rand() % 4;
 
-         F[j].n_jugadores = 11;
+    }
 
-         F[j].goles = rand() % 6;
-
-         F[j].faltas = rand() % 4;
 
     free(arr); 
 

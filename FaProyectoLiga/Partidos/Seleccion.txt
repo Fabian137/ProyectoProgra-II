@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
  0 ---- Uruguay -- G:0 -- F:0
  1 ---- Japon -- G:0 -- F:0
  2 ---- China -- G:0 -- F:0
@@ -15,3 +16,21 @@
  13 ---- Rusia -- G:0 -- F:0
  14 ---- Perú -- G:0 -- F:0
  15 ---- EUA -- G:0 -- F:0
+=======
+ 0 ---- Finland -- G:4 -- F:0
+ 1 ---- EUA -- G:3 -- F:2
+ 2 ---- Japon -- G:3 -- F:0
+ 3 ---- Paraguay -- G:0 -- F:0
+ 4 ---- Nepal -- G:3 -- F:0
+ 5 ---- Rusia -- G:0 -- F:3
+ 6 ---- España -- G:1 -- F:0
+ 7 ---- Uruguay -- G:0 -- F:0
+ 8 ---- Poland -- G:3 -- F:2
+ 9 ---- Indonesia -- G:0 -- F:0
+ 10 ---- Suiza -- G:5 -- F:3
+ 11 ---- China -- G:1 -- F:1
+ 12 ---- Perú -- G:0 -- F:1
+ 13 ---- Philippines -- G:0 -- F:1
+ 14 ---- Yemen -- G:4 -- F:0
+ 15 ---- Mexico -- G:0 -- F:1
+>>>>>>> 74a0b141654601f4bc55f3aa12224d26eeded363
