@@ -1,5 +1,5 @@
 
- 0 ---- Suiza -- G:0 -- F:0
- 4 ---- Japon -- G:0 -- F:0
- 8 ---- Indonesia -- G:0 -- F:0
- 14 ---- Nepal -- G:1 -- F:0
+ 0 ---- Uruguay -- G:1 -- F:1
+ 4 ---- Suiza -- G:0 -- F:0
+ 8 ---- Yemen -- G:0 -- F:0
+ 12 ---- Philippines -- G:0 -- F:0
