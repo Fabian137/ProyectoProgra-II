@@ -4,7 +4,7 @@
 #include <time.h>
 
 struct futbolTeams{
-    char teamsName[20], D_Tecnico[20], Capitan[10];
+    char teamsName[20], D_Tecnico[40], Capitan[40];
     int clave, n_jugadores, goles, faltas, NumCampeon;
 
 };
@@ -53,19 +53,24 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
     FILE *archNombres;
     FILE *archDTec;
     
-    int i, c=0, j;
+    int i, c=0, k=0, j, MAX_LENGTH=40;
     int *arr;
-    char teams[20], nombre[40], dtec[40];
+    char teams[20], nombre[MAX_LENGTH], dtec[40];
 
     arr = (int *) malloc(n * sizeof(int));
 
     archivo = fopen("data/teams.txt", "r");
-    archNombres = fopen("data/nombres.csv", "r");
-    archDTec = fopen("data/DTecnico.csv", "r");
-    
+    archNombres = fopen("data/nombres.txt", "r");
+    archDTec = fopen("data/Dtecnico.txt", "r");
 
     if (archivo == NULL) {
         printf("Error al abrir el archivo\n");
+    }
+    if(archNombres == NULL){
+        printf("Error al abrir archNombres\n");
+    }
+    if(archDTec == NULL){
+        printf("Error al abrir archDTec\n");
     }
 
 
@@ -88,6 +93,17 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
             F[j].clave = j;
         }
 
+        while (fgets(nombre, MAX_LENGTH, archNombres) != NULL) {
+            c++;
+            strcpy(F[c].Capitan, nombre);
+            // printf("Nombre completo: %s", nombre);
+        }
+        while (fgets(nombre, MAX_LENGTH, archDTec) != NULL) {
+            k++;
+            strcpy(F[k].D_Tecnico, nombre);
+            // printf("Nombre completo: %s", nombre);
+        }
+        /*
         for (i = 0; i < n; i++){
             if (fscanf(archNombres, "%s,", nombre) != EOF){
                     c=arr[i];
@@ -102,6 +118,8 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
             }
         }
 
+        */
+
     }
 
          F[j].n_jugadores = 11;
@@ -111,7 +129,10 @@ void generarDatos(struct futbolTeams *F, int n, int modo, int root){
          F[j].faltas = rand() % 4;
 
     free(arr); 
+
     fclose(archivo);
+    fclose(archNombres);
+    fclose(archDTec);
     
 }
 

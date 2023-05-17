@@ -1,5 +1,5 @@
 
- 0 ---- Indonesia -- G:0 -- F:0
- 4 ---- Poland -- G:0 -- F:0
- 8 ---- Perú -- G:0 -- F:0
- 12 ---- Nepal -- G:0 -- F:0
+ 0 ---- Suiza -- G:0 -- F:0
+ 4 ---- Japon -- G:0 -- F:0
+ 8 ---- Indonesia -- G:0 -- F:0
+ 14 ---- Nepal -- G:1 -- F:0
