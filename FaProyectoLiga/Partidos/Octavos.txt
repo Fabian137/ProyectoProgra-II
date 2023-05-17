@@ -1,0 +1,20 @@
+
+<<<<<<< HEAD
+ 1 ---- Yemen -- G:2 -- F:3
+ 2 ---- Philippines -- G:4 -- F:0
+ 4 ---- Nepal -- G:5 -- F:1
+ 6 ---- Mexico -- G:1 -- F:0
+ 8 ---- Poland -- G:3 -- F:3
+ 11 ---- España -- G:2 -- F:3
+ 13 ---- Rusia -- G:5 -- F:2
+ 14 ---- Japon -- G:2 -- F:222
+=======
+ 1 ---- China -- G:5 -- F:2
+ 2 ---- Finland -- G:4 -- F:0
+ 5 ---- Philippines -- G:0 -- F:1
+ 6 ---- Japon -- G:0 -- F:2
+ 9 ---- Indonesia -- G:4 -- F:0
+ 11 ---- Nepal -- G:3 -- F:1
+ 13 ---- Yemen -- G:3 -- F:2
+ 14 ---- EUA -- G:2 -- F:3
+>>>>>>> d012763820cd8bc3e2988cb729818ebe8d017258
