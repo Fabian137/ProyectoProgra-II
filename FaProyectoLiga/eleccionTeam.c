@@ -31,6 +31,9 @@ int menu(struct futbolTeams *F);
 void caratula();
 
 
+void caratula();
+int menu();
+
 
 
 int main(){
@@ -45,7 +48,14 @@ int main(){
             printf("\n--%d--\n",n);
     int root = time(NULL);
 
+<<<<<<< HEAD
     equipo = (struct futbolTeams *) malloc(n * sizeof(struct futbolTeams));
+=======
+    //caratula(); 
+
+
+    generarDatos(equipo, n, 1, root);
+>>>>>>> d012763820cd8bc3e2988cb729818ebe8d017258
 
     generarDatos(equipo, n, 1, root);
         printf("\n--%d--\n",n);
@@ -60,6 +70,9 @@ int main(){
     } while(respuesta == 's' || respuesta == 'S');
     
     free(equipo);
+
+    //menu();
+
 
     return 0;
 
@@ -144,12 +157,17 @@ void imprimirDatos(struct futbolTeams *F,int init, int n, int modo){
         if (modo == 1){
             
         printf("\n\n\t\t---- %s ----", F[i].teamsName);
+<<<<<<< HEAD
         printf("\n\tDirector Tecnico: %s", F[i].D_Tecnico);
+=======
+        printf("\n\n\t\tclave de equipo: %d", F[i].clave);
+        printf("\n\n\tDirector Tecnico: %s", F[i].D_Tecnico);
+>>>>>>> d012763820cd8bc3e2988cb729818ebe8d017258
         printf("\n\tCapitan: %s", F[i].Capitan);
        
         printf("\n\tNumero de jugadores: %d", F[i].n_jugadores);
 
-        printf("\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
+        printf("\n\n\t\tGoles: %d ----- Faltas: %d \n", F[i].goles, F[i].faltas);
         
         // fprintf(archivo_Infos, "%d, %d, %s  ---- G: %d ---- F: %d\n", F[i].clave, i, F[i].teamsName, F[i].goles, F[i].faltas);
         fprintf(archivo_Infos, "%s - %d\n", F[i].teamsName, F[i].clave);
@@ -229,7 +247,13 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
     archivoPartidos = fopen("Partidos/General_matches.txt", "w");
    
     char *cadena;
+<<<<<<< HEAD
         cadena = (char *) malloc(25 * sizeof(char));
+=======
+        cadena = (char *) malloc(40 * sizeof(char));
+        
+
+>>>>>>> d012763820cd8bc3e2988cb729818ebe8d017258
     
     switch (n){
         case 16:
@@ -258,8 +282,25 @@ void escrituraArchivos_Partidos(struct futbolTeams *F, int *arr, int n){
             cadena = "Partidos/semifinales.txt";
             fprintf(archivoPartidos, "\n--------------------\n");
             iteraciones(F, arr, n, cadena);
+<<<<<<< HEAD
             fechas(F, arr, 2, 22, 4, 22);
         break;
+=======
+            fechas(F, arr, 2, 22, 4, 23);
+            //fechas(F, 4, arr, 2, );
+        break;
+
+        case 1:
+            cadena = "Partidos/finales.txt";
+            fprintf(archivoPartidos, "\n--------------------\n");
+            iteraciones(F, arr, n, cadena);
+            //fechas(F, 4, arr, 1, );
+        break;
+        
+        /*
+        */
+
+>>>>>>> d012763820cd8bc3e2988cb729818ebe8d017258
         default:
         break;
     }
@@ -390,8 +431,13 @@ void fechas(struct futbolTeams *F, int *ids, int n, int init, int month, int end
             break;
 
             case 4:
+<<<<<<< HEAD
                 if(dias[i] > 31){
                     printf("\n");
+=======
+                if(dias[i] ==23){
+                    printf("\n /_");
+>>>>>>> d012763820cd8bc3e2988cb729818ebe8d017258
                     // Asi evitamos esa especie de fecha que se genera extra 
                 }
                 else{
@@ -461,6 +507,7 @@ void caratula(){
 
 }
 
+<<<<<<< HEAD
 void composer(struct futbolTeams *F){
     int opcion, teamID, id, MAX_LENGTH = 10;
     char respuesta, campeon[MAX_LENGTH];
@@ -523,5 +570,63 @@ int opcion;
     
     printf("\n\tOpcion: ");
     scanf("%d", &opcion);
+=======
+void caratula(){
+    printf("\n\n\t\t\t \033[38;5;31m \033[1m--------- || PROYECTO || --------- \n \t\t\t\t   -Liga de fútbol- \033[1m \033[0m\n");
+    // printf("\n\n\t\t\t  \033[38;5;31mTexto en rojo\033[0m\n \n \t\t\t-Liga de fútbol");
+    printf("\n\n\t\t Pogramación II");
+    printf("\n\t\t Profesora: Alma López Blanco");
+
+    printf("\n\n\t Integrantes");
+    printf("\n\t - Beltrán Isidro Carlos Fabián");
+    printf("\n\t - Veizaga Pinto Frida");
+    printf("\n\t - Díaz Valdez Gilberto Fidel");
+
+    
+
+
+}
+
+int menu(){
+
+int opcion;
+
+while(opcion!=5){
+
+
+    printf("\n\n\t Elige una opcion si quieres una consulta: ");
+    printf("\n\n\t 1) El equipo con mayor número de campeonatos");
+    printf("\n\n\t 2) Información detallada de un equipo");
+    printf("\n\n\t 3) Información detallada de todos los equipos");
+    printf("\n\n\t 4) Partidos ganados");
+    printf("\n\n\t 5) Salir");
+
+    scanf("\n\n%d", &opcion);
+                
+       switch (opcion){
+   case 1:
+    printf("\n\nLO que se que tenga que hacer en la opcion 1");
+    break;
+   case 2:
+    printf("\n\nLO que se que tenga que hacer en la opcion 2");
+    break;
+    case 3:
+    printf("\n\nLO que se que tenga que hacer en la opcion 3");
+    break;
+    case 4:
+    printf("\n\nLO que se que tenga que hacer en la opcion 4");
+    break;
+    case 5:
+    printf("\n\nSe acaba el programa cuando digitas 5");
+    break;
+
+
+   default:
+    break;
+   }
+
+
+}
+>>>>>>> d012763820cd8bc3e2988cb729818ebe8d017258
     return opcion; 
 }
