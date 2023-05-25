@@ -1,23 +1,27 @@
 # Ejecución de la Liga en ***Codespace***
 
 
+
+
 Presionamos el botón de **code** 
-![Ejemplo de las "rondas"](imgsReadme/SS_20230524_2256.jpg)
+
+![Code](imgsReadme/SS_20230524_2256.jpg)
 
 Nos mostrará dos opciones: **Local** y **Codespaces**
-![Ejemplo de las "rondas"](imgsReadme/SS_20230524_2302.jpg)
+
+![Botón Codespaces](imgsReadme/SS_20230524_2302.jpg)
 
 Seleccionamos **Codespaces** y hacemos click en el espacio *musical guide (O el que esté ahi)*. 
 
-![Ejemplo de las "rondas"](imgsReadme/SS_20230524_2357.jpg)
+![Seleccionamos](imgsReadme/SS_20230525_0024.jpg)
 
 Si no aparece creamos un *codespace*. ***Create codespace on master***
 
-![Ejemplo de las "rondas"](imgsReadme/SS_20230525_0002.jpg)
+![Creación de un codespace](imgsReadme/SS_20230525_0002.jpg)
 
 Nos abrirá un espacio parecido a este 
 
-![Ejemplo de las "rondas"](imgsReadme/SS_20230525_0005.jpg)
+![Codespace](imgsReadme/SS_20230525_0030.jpg)
 
 - Entramos a la carpeta donde se encuentra el proyecto (Liga) \
 ```cd Liga/```
