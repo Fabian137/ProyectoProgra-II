@@ -319,7 +319,7 @@ void enfrentamientos(struct futbolTeams *F){
         Array_ids(id_team, n);
         printf("\n\n\n\n\t\t\t %s \n\n\n", F[id_team[0]].teamsName);
 
-        history = fopen("Partidos/campeones.csv", "a");
+        history = fopen("campeones.csv", "a");
 
             
             fprintf(history, "%s,\n", F[id_team[0]].teamsName);
